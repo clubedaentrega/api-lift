@@ -1,0 +1,31 @@
+{
+	"name": "api-lift",
+	"version": "0.0.0",
+	"author": "Sitegui <sitegui@sitegui.com.br>",
+	"description": "Create a ready-to-go express router for a REST API with filters, input validation, versioning, automatic routes and logging",
+	"main": "./index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/clubedaentrega/api-lift"
+	},
+	"keywords": [
+		"express",
+		"rest",
+		"versioning",
+		"api"
+	],
+	"dependencies": {
+		"lift-it": "^1.0.3"
+	},
+	"license": "MIT",
+	"engines": {
+		"node": ">=0.10"
+	},
+	"scripts": {
+		"test": "mocha test"
+	},
+	"devDependencies": {
+		"mocha": "^2.1.0",
+		"should": "^4.4.1"
+	}
+}
