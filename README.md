@@ -28,11 +28,46 @@ Okay, after complying to all the rules outlined above, you get:
 * Versioning: don't break old consumers and yet let the API evolve
 * Logging: simple logging interface to connect to any logging solution (like [log-sink](https://www.npmjs.com/package/log-sink))
 
-### Versioning
-TODO
-
-### Logging
-TODO
-
 ## Options
+```js
+var apiLift = require('api-lift')
+
+var router = apiLift({
+	// All options are optional
+	// The values bellow are the default
+	
+	// Options for `lift-it`
+	folder: './api',
+	profile: false,
+	errorClass: apiLift.Error,
+	enableErrorCode: true,
+	onerror: function (action) {
+	},
+	
+	// Options for validate plugin of `lift-it`
+	validate: {
+		// Use the plugin defaults
+	},
+	
+	// Options for filters plugin of `lift-it`
+	filters: './filters',
+	
+	// Options for this module
+	versioning: true,
+	onlog: function () {
+		// TODO
+	}
+})
+
+// `router` is an express router object
+// You can, for example:
+var app = apiLift.express() // see note bellow about apiLift.express
+app.use('/api', router)
+require('http').createServer(app).listen(80)
+```
+
+## Versioning
+TODO
+
+## Logging
 TODO
