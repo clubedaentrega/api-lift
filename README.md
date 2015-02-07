@@ -18,6 +18,8 @@ This module is locked down by some strong assumptions:
 
 * The routes are created and named after the files in the file system
 * The endpoints are to be implemented as supported by [lift-it](https://www.npmjs.com/package/lift-it)
+* In the endpoints files, `exports.description` is a string describing what it does
+* The first argument for the endpoint handler is the request `body`. `body._req` points to the express request object (this property is non-enumerable).
 * All routes are requested with POST. All input and output is JSON
 * Standard output for success: `{failure:null}`, for error: `{failure:{code:Number,message:String}}`
 
@@ -56,10 +58,13 @@ var router = apiLift({
 	filters: './filters',
 	
 	// Options for this module
+	minVersion: 1, // the min version to support
 	onsuccess: function (response, req, body, action) {
 		// Called right before a request is answered with success
 		// `response` is the JSON object to send
 		// `req` is the express request object
+		// `req.beginTime` is the value of Date.now() when the request was received
+		// `req.profileData` is the profile data (if enabled)
 		// `body` is the cleaned (see bellow) JSON input
 		// `action` is the lift-it action
 	},

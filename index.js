@@ -3,7 +3,7 @@
 var express = require('express'),
 	APIError = require('./lib/APIError'),
 	lift = require('./lib/lift'),
-	route = require('./lib/route')
+	router = require('./lib/router')
 
 /**
  * @property {Object} [options] - see defaults in README
@@ -16,12 +16,13 @@ module.exports = function (options) {
 	options.profile = Boolean(options.profile)
 	options.validate = options.validate || {}
 	options.filters = options.filters || './filters'
+	options.minVersion = options.minVersion === undefined ? 1 : options.minVersion
 
 	// Lift and call error callbacks
 	var lifted = lift(options)
 
 	// Create router and return it
-	return route(options, lifted)
+	return router(options, lifted)
 }
 
 module.exports.express = express
