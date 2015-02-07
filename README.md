@@ -35,13 +35,16 @@ var apiLift = require('api-lift')
 var router = apiLift({
 	// All options are optional
 	// The values bellow are the default
+	// Some are not configurable and can not be changed,
+	// those are listed only for your information
 	
 	// Options for `lift-it`
 	folder: './api',
 	profile: false,
-	errorClass: apiLift.Error,
-	enableErrorCode: true,
+	errorClass: apiLift.Error, // <-- can't be changed
+	enableErrorCode: true, // <-- can't be changed
 	onerror: function (action) {
+		// Called for each action (ie, file) that fails to be lifted
 	},
 	
 	// Options for validate plugin of `lift-it`
@@ -53,9 +56,18 @@ var router = apiLift({
 	filters: './filters',
 	
 	// Options for this module
-	versioning: true,
-	onlog: function () {
-		// TODO
+	onsuccess: function (response, req, body, action) {
+		// Called right before a request is answered with success
+		// `response` is the JSON object to send
+		// `req` is the express request object
+		// `body` is the cleaned (see bellow) JSON input
+		// `action` is the lift-it action
+	},
+	onfailure: function (response, req, body, action, error) {
+		// Called right before a request is answered with error
+		// `response`, `req`, `body` and `action` behave the same as onsuccess
+		// `action` may be undefined if the error is not linked to any action
+		// `error` is the original error object
 	}
 })
 
@@ -65,6 +77,10 @@ var app = apiLift.express() // see note bellow about apiLift.express
 app.use('/api', router)
 require('http').createServer(app).listen(80)
 ```
+
+This module uses `express` internally to create the router object. To avoid compatibility problems, it's adviced to use the same lib this module is using. This is exported as `require('api-lift').express`
+
+The parameter `body` given to `onsuccess` and `onfailure` is cleared from any property that has 'session', 'password', 'serial' or 'token' in its name (case-insensitive). This is meant to make it log-safe.
 
 ## Versioning
 TODO

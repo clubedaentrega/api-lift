@@ -71,6 +71,17 @@ describe('versions', function () {
 		}])
 	})
 
+	it('should raise an error if a tagged file is older than min version', function () {
+		var a = {
+				name: 'user/create-v2'
+			},
+			boom = function () {
+				versions(3, [a])
+			}
+
+		boom.should.throw()
+	})
+
 	it('should work for all together', function () {
 		var a = {
 				name: 'user/create'
