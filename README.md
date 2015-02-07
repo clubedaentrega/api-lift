@@ -2,10 +2,10 @@
 
 Create a ready-to-go express router for a REST API with filters, input validation, versioning, automatic routes and logging.
 
-See on [npm](https://www.npmjs.com/package/cde-api-lift)
+See on [npm](https://www.npmjs.com/package/api-lift)
 
 ## Install
-`npm install cde-api-lift --save`
+`npm install api-lift --save`
 
 ## Important note
 This module is built on top of [express](https://www.npmjs.com/package/express) and [lift-it](https://www.npmjs.com/package/lift-it) and *is* meant to be very opinionated.
