@@ -88,7 +88,43 @@ This module uses `express` internally to create the router object. To avoid comp
 The parameter `body` given to `onsuccess` and `onfailure` is cleared from any property that has 'session', 'password', 'serial' or 'token' in its name (case-insensitive). This is meant to make it log-safe.
 
 ## Versioning
-TODO
+This module aims to make endpoint versioning very simple, pragmatic and source-control friendly. The system only cares about backwards-incompatible changes, that is, MAJOR changes (as defined by [semantic versioning](http://semver.org/)).
+
+By default (`options.minVersion`), all endpoints start at version 1. That is, a file in the path `api/user/create.js` is served at the url `/v1/user/create`. If a breaking change is to be made in this endpoint, the API version must be bumped to 2. To do this, the current file is copied to `api/user/create-v1.js` and new changes can be freely applied to the current `api/user/create.js` file. The new url will be `/v2/user/create` and will be mapped to the current file. The old url will keep working and will point to the old v1 file. Any other endpoint that hasn't been changed will be served equally in v1 and v2. Magic!
+
+Note that the v1 file is like a snapshot. From the point of view of a revision control system (like git), the file has evolved linearly: no move/rename or any other trick (like symlinks).
+
+After some time, the support for version 1 may be dropped, by increasing the `minVersion` option and removing old v1 files.
+
+### Complete example
+For the following files in the api folder:
+```
+api
+	user
+		create.js
+		create-v2.js
+		findbyname-v1.js
+		getinfo.js
+```
+
+Assuming `minVersion` is 1, those endpoints will be created:
+```
+/v1
+	/user/create -> api/user/create-v2.js
+	/user/findbyname -> api/user/findbyname-v1.js
+	/user/getinfo -> api/user/getinfo.js
+/v2
+	/user/create -> api/user/create-v2.js
+	/user/getinfo -> api/user/getinfo.js
+/v3
+	/user/create -> api/user/create.js
+	/user/getinfo -> api/user/getinfo.js
+```
+
+The file `api/user/getinfo.js` is available in all versions. `api/user/create-v2.js` is the snapshot for v1 and v2, `api/user/create.js` is used in v2. `api/user/findbyname-v1.js` is the snapshot for v1 only and is not available in next versions.
 
 ## Logging
+TODO
+
+## Error codes
 TODO

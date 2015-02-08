@@ -9,7 +9,7 @@ describe('versions', function () {
 		versions(0, []).should.be.eql({
 			minVersion: 0,
 			maxVersion: 0,
-			endPoints: []
+			endpoints: []
 		})
 	})
 
@@ -21,7 +21,7 @@ describe('versions', function () {
 		versions(1, [a]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 1,
-			endPoints: [{
+			endpoints: [{
 				url: '/v1/user/create',
 				action: a
 			}]
@@ -39,7 +39,7 @@ describe('versions', function () {
 		versions(1, [a]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 3,
-			endPoints: [{
+			endpoints: [{
 				url: '/v2/user/create',
 				action: a
 			}, {
@@ -51,7 +51,7 @@ describe('versions', function () {
 		versions(1, [a, b]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 3,
-			endPoints: [{
+			endpoints: [{
 				url: '/v2/user/create',
 				action: a
 			}, {
@@ -81,7 +81,7 @@ describe('versions', function () {
 		versions(1, [a, b]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 2,
-			endPoints: [{
+			endpoints: [{
 				url: '/v2/user/create',
 				action: b
 			}, {
@@ -119,7 +119,7 @@ describe('versions', function () {
 		versions(1, [a, b, c, d]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 3,
-			endPoints: [{
+			endpoints: [{
 				url: '/v3/user/create',
 				action: a
 			}, {
