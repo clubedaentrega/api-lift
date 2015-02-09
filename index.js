@@ -14,9 +14,13 @@ module.exports = function (options) {
 	options = options || {}
 	options.folder = options.folder || './api'
 	options.profile = Boolean(options.profile)
+	options.lastVersionIsDev = Boolean(options.lastVersionIsDev)
 	options.validate = options.validate || {}
 	options.filters = options.filters || './filters'
 	options.minVersion = options.minVersion === undefined ? 1 : options.minVersion
+	options.onerror = options.onerror || function (action) {
+		throw action.error
+	}
 
 	// Lift and call error callbacks
 	var lifted = lift(options)

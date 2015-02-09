@@ -61,6 +61,7 @@ describe('api', function () {
 			})
 			action.name.should.be.eql('user/create-v1')
 			done()
+			options.onsuccess = null
 		}
 		call('v1/user/create', body)
 	})
@@ -75,11 +76,43 @@ describe('api', function () {
 			action.name.should.be.eql('user/create')
 			error.code.should.be.equal(101)
 			done()
+			options.onfailure = null
 		}
 		call('v2/user/create', body)
 	})
 
+	it('should warn about unsupported version', function (done) {
+		call('v0/user/create', body, function (res) {
+			res.failure.code.should.be.equal(199)
+			res.failure.message.should.be.equal('Version 0 is not supported anymore. Minimum supported version is 1 and the current version is 2')
+			done()
+		})
+	})
 
+	it('should warn about unknown version', function (done) {
+		call('v10/user/create', body, function (res) {
+			res.failure.code.should.be.equal(199)
+			res.failure.message.should.be.equal(
+				'Version 10 is unknown. Minimum supported version is 1 and the current version is 2')
+			done()
+		})
+	})
+
+	it('should warn about non existent endpoint', function (done) {
+		call('v1/i/do/not/exist', body, function (res) {
+			res.failure.code.should.be.equal(199)
+			res.failure.message.should.be.equal('The action i/do/not/exist does not exists in version 1')
+			done()
+		})
+	})
+
+	it('should warn about invalid URL structure', function (done) {
+		call('not/valid', body, function (res) {
+			res.failure.code.should.be.equal(199)
+			res.failure.message.should.be.equal('Invalid path format, expected something like /v2/user/create')
+			done()
+		})
+	})
 })
 
 /**

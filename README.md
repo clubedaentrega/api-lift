@@ -47,6 +47,7 @@ var router = apiLift({
 	enableErrorCode: true, // <-- can't be changed
 	onerror: function (action) {
 		// Called for each action (ie, file) that fails to be lifted
+		throw action.error
 	},
 	
 	// Options for validate plugin of `lift-it`
@@ -59,6 +60,7 @@ var router = apiLift({
 	
 	// Options for this module
 	minVersion: 1, // the min version to support
+	lastVersionIsDev: false, // whether the last version is development stage
 	onsuccess: function (response, req, body, action) {
 		// Called right before a request is answered with success
 		// `response` is the JSON object to send
@@ -123,8 +125,20 @@ Assuming `minVersion` is 1, those endpoints will be created:
 
 The file `api/user/getinfo.js` is available in all versions. `api/user/create-v2.js` is the snapshot for v1 and v2, `api/user/create.js` is used in v2. `api/user/findbyname-v1.js` is the snapshot for v1 only and is not available in next versions.
 
+### Development version
+The last version may be in development stage and not yet ready to provide backwards compatible coverage. In this situation `options.lastVersionIsDev` should be set to `true`. This will let the team work on a bigger feature and warn possible consumers that the version is under active development and backwards compatibility may not be honored.
+
+An example to ilustrate and help understand its use:  
+Imagine two endpoints `/v4/A` (file `api/A.js`) and `/v4/B` (file `api/B.js`), both at the current version (v4). The next version (v5) will bring breaking changes to both. The implementation will happen in three steps.  
+The first step will be snapshot `api/A.js` to `api/A-v4.js`, set `lastVersionIsDev` and then change
+`api/A.js`. This step alone will bump the current version to v5-dev, keep old v4 routes working as before and route `/v5-dev/A` to the new implementation. At this point `/v5-dev/B` will map to old (v4) behaviour, since the action `/api/B.js` remained the same in this first step.  
+The second step will snapshot `api/B-v4.js` and change `api/B.js`. This will change the behaviour of `/v5-dev/B` accordingly. Note that this does not honor backwards compatibility, since the same endpoint (under the same URL) went through a breaking change. But who else was using this endpoint has already been advised it could happen.  
+The third step will unset `lastVersionIsDev`. This will remove support for v5-dev and enable support for v5. For this point on, v5 backwards compatibility should be ensured.
+
 ## Logging
 TODO
+
+## Endpoint handler
 
 ## Error codes
 TODO
