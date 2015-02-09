@@ -1,4 +1,4 @@
-# CdE API Lift
+# API Lift
 
 Create a ready-to-go express router for a REST API with filters, input validation, versioning, automatic routes and logging.
 
@@ -17,10 +17,8 @@ This module is built on top of [express](https://www.npmjs.com/package/express) 
 This module is locked down by some strong assumptions:
 
 * The routes are created and named after the files in the file system
-* The endpoints are to be implemented as supported by [lift-it](https://www.npmjs.com/package/lift-it)
-* In the endpoints files, `exports.description` is a string describing what it does
-* The first argument for the endpoint handler is the request `body`. `body._req` points to the express request object (this property is non-enumerable).
-* All routes are requested with POST. All input and output is JSON
+* The endpoints are to be implemented as supported by [lift-it](https://www.npmjs.com/package/lift-it). See details in section "Endpoint handler"
+* All routes only answer POST requests. All input and output is JSON
 * Standard output for success: `{failure:null}`, for error: `{failure:{code:Number,message:String}}`
 
 ## Features
@@ -60,7 +58,7 @@ var router = apiLift({
 	
 	// Options for this module
 	minVersion: 1, // the min version to support
-	lastVersionIsDev: false, // whether the last version is development stage
+	lastVersionIsDev: false, // whether the last version is in development stage
 	onsuccess: function (response, req, body, action) {
 		// Called right before a request is answered with success
 		// `response` is the JSON object to send
@@ -68,7 +66,7 @@ var router = apiLift({
 		// `req.beginTime` is the value of Date.now() when the request was received
 		// `req.profileData` is the profile data (if enabled)
 		// `body` is the cleaned (see bellow) JSON input
-		// `action` is the lift-it action
+		// `action` is the lift-it action object
 	},
 	onfailure: function (response, req, body, action, error) {
 		// Called right before a request is answered with error
@@ -87,7 +85,7 @@ require('http').createServer(app).listen(80)
 
 This module uses `express` internally to create the router object. To avoid compatibility problems, it's adviced to use the same lib this module is using. This is exported as `require('api-lift').express`
 
-The parameter `body` given to `onsuccess` and `onfailure` is cleared from any property that has 'session', 'password', 'serial' or 'token' in its name (case-insensitive). This is meant to make it log-safe.
+The parameter `body` given to `onsuccess` and `onfailure` has any property that contains 'session', 'password', 'serial' or 'token' in its name (case-insensitive) removed (even in deep objects and arrays). This is meant to make it log-safe.
 
 ## Versioning
 This module aims to make endpoint versioning very simple, pragmatic and source-control friendly. The system only cares about backwards-incompatible changes, that is, MAJOR changes (as defined by [semantic versioning](http://semver.org/)).
@@ -123,14 +121,14 @@ Assuming `minVersion` is 1, those endpoints will be created:
 	/user/getinfo -> api/user/getinfo.js
 ```
 
-The file `api/user/getinfo.js` is available in all versions. `api/user/create-v2.js` is the snapshot for v1 and v2, `api/user/create.js` is used in v2. `api/user/findbyname-v1.js` is the snapshot for v1 only and is not available in next versions.
+The file `api/user/getinfo.js` is available in all versions. `api/user/create-v2.js` is the snapshot for v1 and v2, `api/user/create.js` is used in v3. `api/user/findbyname-v1.js` is the snapshot for v1 only and is not available in next versions.
 
 ### Development version
 The last version may be in development stage and not yet ready to provide backwards compatible coverage. In this situation `options.lastVersionIsDev` should be set to `true`. This will let the team work on a bigger feature and warn possible consumers that the version is under active development and backwards compatibility may not be honored.
 
 An example to ilustrate and help understand its use:  
 Imagine two endpoints `/v4/A` (file `api/A.js`) and `/v4/B` (file `api/B.js`), both at the current version (v4). The next version (v5) will bring breaking changes to both. The implementation will happen in three steps.  
-The first step will be snapshot `api/A.js` to `api/A-v4.js`, set `lastVersionIsDev` and then change
+The first step will snapshot `api/A.js` to `api/A-v4.js`, set `lastVersionIsDev` and then change
 `api/A.js`. This step alone will bump the current version to v5-dev, keep old v4 routes working as before and route `/v5-dev/A` to the new implementation. At this point `/v5-dev/B` will map to old (v4) behaviour, since the action `/api/B.js` remained the same in this first step.  
 The second step will snapshot `api/B-v4.js` and change `api/B.js`. This will change the behaviour of `/v5-dev/B` accordingly. Note that this does not honor backwards compatibility, since the same endpoint (under the same URL) went through a breaking change. But who else was using this endpoint has already been advised it could happen.  
 The third step will unset `lastVersionIsDev`. This will remove support for v5-dev and enable support for v5. For this point on, v5 backwards compatibility should be ensured.
