@@ -6,9 +6,13 @@ require('should')
 
 describe('versions', function () {
 	it('should return an empty set if no action is given', function () {
-		versions(0, []).should.be.eql({
+		versions({
+			minVersion: 0,
+			lastVersionIsDev: false
+		}, []).should.be.eql({
 			minVersion: 0,
 			maxVersion: 0,
+			lastVersionIsDev: false,
 			endpoints: []
 		})
 	})
@@ -18,9 +22,13 @@ describe('versions', function () {
 			name: 'user/create'
 		}
 
-		versions(1, [a]).should.be.eql({
+		versions({
+			minVersion: 1,
+			lastVersionIsDev: false
+		}, [a]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 1,
+			lastVersionIsDev: false,
 			endpoints: [{
 				url: '/v1/user/create',
 				action: a
@@ -36,9 +44,13 @@ describe('versions', function () {
 				name: 'user/update'
 			}
 
-		versions(1, [a]).should.be.eql({
+		versions({
+			minVersion: 1,
+			lastVersionIsDev: false
+		}, [a]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 3,
+			lastVersionIsDev: false,
 			endpoints: [{
 				url: '/v2/user/create',
 				action: a
@@ -48,9 +60,13 @@ describe('versions', function () {
 			}]
 		})
 
-		versions(1, [a, b]).should.be.eql({
+		versions({
+			minVersion: 1,
+			lastVersionIsDev: false
+		}, [a, b]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 3,
+			lastVersionIsDev: false,
 			endpoints: [{
 				url: '/v2/user/create',
 				action: a
@@ -78,9 +94,13 @@ describe('versions', function () {
 				name: 'user/create'
 			}
 
-		versions(1, [a, b]).should.be.eql({
+		versions({
+			minVersion: 1,
+			lastVersionIsDev: false
+		}, [a, b]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 2,
+			lastVersionIsDev: false,
 			endpoints: [{
 				url: '/v2/user/create',
 				action: b
@@ -96,10 +116,38 @@ describe('versions', function () {
 				name: 'user/create-v2'
 			},
 			boom = function () {
-				versions(3, [a])
+				versions({
+					minVersion: 3,
+					lastVersionIsDev: false
+				}, [a])
 			}
 
-		boom.should.throw()
+		boom.should.throw('Uhm... You have told me the minimum version you want to support is 3 but the file user/create-v2 violates this. You must either decrease the min version value or remove the offending file')
+	})
+
+	it('should create dev routes', function () {
+		var a = {
+				name: 'user/create-v1'
+			},
+			b = {
+				name: 'user/create'
+			}
+
+		versions({
+			minVersion: 1,
+			lastVersionIsDev: true
+		}, [a, b]).should.be.eql({
+			minVersion: 1,
+			maxVersion: 2,
+			lastVersionIsDev: true,
+			endpoints: [{
+				url: '/v2-dev/user/create',
+				action: b
+			}, {
+				url: '/v1/user/create',
+				action: a
+			}]
+		})
 	})
 
 	it('should work for all together', function () {
@@ -116,11 +164,15 @@ describe('versions', function () {
 				name: 'user/current'
 			}
 
-		versions(1, [a, b, c, d]).should.be.eql({
+		versions({
+			minVersion: 1,
+			lastVersionIsDev: true
+		}, [a, b, c, d]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 3,
+			lastVersionIsDev: true,
 			endpoints: [{
-				url: '/v3/user/create',
+				url: '/v3-dev/user/create',
 				action: a
 			}, {
 				url: '/v2/user/create',
@@ -132,7 +184,7 @@ describe('versions', function () {
 				url: '/v1/user/old',
 				action: c
 			}, {
-				url: '/v3/user/current',
+				url: '/v3-dev/user/current',
 				action: d
 			}, {
 				url: '/v2/user/current',
