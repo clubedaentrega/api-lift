@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports.description = 'Create a user. Do not check for weak passwords. Depreacted'
+module.exports.description = 'Create a user. Do not check for weak passwords. Deprecated'
 
 module.exports.fields = {
 	name: String,

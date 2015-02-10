@@ -13,6 +13,7 @@ describe('versions', function () {
 			minVersion: 0,
 			maxVersion: 0,
 			lastVersionIsDev: false,
+			versions: ['v0'],
 			endpoints: []
 		})
 	})
@@ -29,6 +30,7 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 1,
 			lastVersionIsDev: false,
+			versions: ['v1'],
 			endpoints: [{
 				url: '/v1/user/create',
 				action: a
@@ -51,6 +53,7 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 3,
 			lastVersionIsDev: false,
+			versions: ['v1', 'v2', 'v3'],
 			endpoints: [{
 				url: '/v2/user/create',
 				action: a
@@ -67,6 +70,7 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 3,
 			lastVersionIsDev: false,
+			versions: ['v1', 'v2', 'v3'],
 			endpoints: [{
 				url: '/v2/user/create',
 				action: a
@@ -101,6 +105,7 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 2,
 			lastVersionIsDev: false,
+			versions: ['v1', 'v2'],
 			endpoints: [{
 				url: '/v2/user/create',
 				action: b
@@ -140,11 +145,32 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 2,
 			lastVersionIsDev: true,
+			versions: ['v1', 'v2-dev'],
 			endpoints: [{
 				url: '/v2-dev/user/create',
 				action: b
 			}, {
 				url: '/v1/user/create',
+				action: a
+			}]
+		})
+	})
+
+	it('should work when there is no stable version', function () {
+		var a = {
+			name: 'user/create'
+		}
+
+		versions({
+			minVersion: 1,
+			lastVersionIsDev: true
+		}, [a]).should.be.eql({
+			minVersion: 1,
+			maxVersion: 1,
+			lastVersionIsDev: true,
+			versions: ['v1-dev'],
+			endpoints: [{
+				url: '/v1-dev/user/create',
 				action: a
 			}]
 		})
@@ -171,6 +197,7 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 3,
 			lastVersionIsDev: true,
+			versions: ['v1', 'v2', 'v3-dev'],
 			endpoints: [{
 				url: '/v3-dev/user/create',
 				action: a

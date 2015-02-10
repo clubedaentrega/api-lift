@@ -84,7 +84,7 @@ describe('api', function () {
 	it('should warn about unsupported version', function (done) {
 		call('v0/user/create', body, function (res) {
 			res.failure.code.should.be.equal(199)
-			res.failure.message.should.be.equal('Version 0 is not supported anymore. Minimum supported version is 1 and the current version is 2')
+			res.failure.message.should.be.equal('Version v0 is not supported. Supported versions are: v1, v2')
 			done()
 		})
 	})
@@ -93,7 +93,7 @@ describe('api', function () {
 		call('v10/user/create', body, function (res) {
 			res.failure.code.should.be.equal(199)
 			res.failure.message.should.be.equal(
-				'Version 10 is unknown. Minimum supported version is 1 and the current version is 2')
+				'Version v10 is not supported. Supported versions are: v1, v2')
 			done()
 		})
 	})
@@ -101,7 +101,7 @@ describe('api', function () {
 	it('should warn about non existent endpoint', function (done) {
 		call('v1/i/do/not/exist', body, function (res) {
 			res.failure.code.should.be.equal(199)
-			res.failure.message.should.be.equal('The action i/do/not/exist does not exists in version 1')
+			res.failure.message.should.be.equal('The action i/do/not/exist does not exists in version v1')
 			done()
 		})
 	})
