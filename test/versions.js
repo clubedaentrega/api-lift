@@ -32,6 +32,9 @@ describe('versions', function () {
 			lastVersionIsDev: false,
 			versions: ['v1'],
 			endpoints: [{
+				url: '/v-last/user/create',
+				action: a
+			}, {
 				url: '/v1/user/create',
 				action: a
 			}]
@@ -78,6 +81,9 @@ describe('versions', function () {
 				url: '/v1/user/create',
 				action: a
 			}, {
+				url: '/v-last/user/update',
+				action: b
+			}, {
 				url: '/v3/user/update',
 				action: b
 			}, {
@@ -107,6 +113,9 @@ describe('versions', function () {
 			lastVersionIsDev: false,
 			versions: ['v1', 'v2'],
 			endpoints: [{
+				url: '/v-last/user/create',
+				action: b
+			}, {
 				url: '/v2/user/create',
 				action: b
 			}, {
@@ -147,6 +156,9 @@ describe('versions', function () {
 			lastVersionIsDev: true,
 			versions: ['v1', 'v2-dev'],
 			endpoints: [{
+				url: '/v-last/user/create',
+				action: b
+			}, {
 				url: '/v2-dev/user/create',
 				action: b
 			}, {
@@ -170,6 +182,9 @@ describe('versions', function () {
 			lastVersionIsDev: true,
 			versions: ['v1-dev'],
 			endpoints: [{
+				url: '/v-last/user/create',
+				action: a
+			}, {
 				url: '/v1-dev/user/create',
 				action: a
 			}]
@@ -199,6 +214,9 @@ describe('versions', function () {
 			lastVersionIsDev: true,
 			versions: ['v1', 'v2', 'v3-dev'],
 			endpoints: [{
+				url: '/v-last/user/create',
+				action: a
+			}, {
 				url: '/v3-dev/user/create',
 				action: a
 			}, {
@@ -210,6 +228,9 @@ describe('versions', function () {
 			}, {
 				url: '/v1/user/old',
 				action: c
+			}, {
+				url: '/v-last/user/current',
+				action: d
 			}, {
 				url: '/v3-dev/user/current',
 				action: d

@@ -11,7 +11,7 @@ See on [npm](https://www.npmjs.com/package/api-lift)
 This module is built on top of [express](https://www.npmjs.com/package/express) and [lift-it](https://www.npmjs.com/package/lift-it) and *is* meant to be very opinionated.
 
 ## Status
-**EXPERIMENTAL**
+**WORK IN PROGRESS**
 
 ## Assumptions
 This module is locked down by some strong assumptions:
@@ -33,8 +33,8 @@ Okay, after complying to all the rules outlined above, you get:
 var apiLift = require('api-lift')
 
 var router = apiLift({
-	// All options are optional
-	// The values bellow are the default
+	// All options are optional :P
+	// The default values are described bellow
 	// Some are not configurable and can not be changed,
 	// those are listed only for your information
 	
@@ -85,7 +85,7 @@ require('http').createServer(app).listen(80)
 
 This module uses `express` internally to create the router object. To avoid compatibility problems, it's adviced to use the same lib this module is using. This is exported as `require('api-lift').express`
 
-The parameter `body` given to `onsuccess` and `onfailure` has any property that contains 'session', 'password', 'serial' or 'token' in its name (case-insensitive) removed (even in deep objects and arrays). This is meant to make it log-safe.
+The parameter `body` given to `onsuccess` and `onfailure` have had any property that contains 'session', 'password', 'serial' or 'token' in its name (case-insensitive) removed (even in deep objects and arrays). This is meant to make it log-safe.
 
 ## Versioning
 This module aims to make endpoint versioning very simple, pragmatic and source-control friendly. The system only cares about backwards-incompatible changes, that is, MAJOR changes (as defined by [semantic versioning](http://semver.org/)).
@@ -95,6 +95,8 @@ By default (`options.minVersion`), all endpoints start at version 1. That is, a 
 Note that the v1 file is like a snapshot. From the point of view of a revision control system (like git), the file has evolved linearly: no move/rename or any other trick (like symlinks).
 
 After some time, the support for version 1 may be dropped, by increasing the `minVersion` option and removing old v1 files.
+
+If needed, the most recent version, including development versions, is available under `v-last`, like `/v-last/user/create`.
 
 ### Complete example
 For the following files in the api folder:
@@ -116,7 +118,7 @@ Assuming `minVersion` is 1, those endpoints will be created:
 /v2
 	/user/create -> api/user/create-v2.js
 	/user/getinfo -> api/user/getinfo.js
-/v3
+/v3 and /v-last
 	/user/create -> api/user/create.js
 	/user/getinfo -> api/user/getinfo.js
 ```

@@ -15,8 +15,8 @@
 		"api"
 	],
 	"dependencies": {
-		"body-parser": "^1.11.0",
-		"express": "^4.11.2",
+		"body-parser": "^1.12.2",
+		"express": "^4.12.2",
 		"lift-it": "^1.0.3"
 	},
 	"license": "MIT",
@@ -27,8 +27,8 @@
 		"test": "mocha test"
 	},
 	"devDependencies": {
-		"mocha": "^2.1.0",
+		"mocha": "^2.2.1",
 		"request": "^2.53.0",
-		"should": "^4.6.5"
+		"should": "^5.2.0"
 	}
 }
