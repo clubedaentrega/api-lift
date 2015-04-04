@@ -1,6 +1,6 @@
 {
 	"name": "api-lift",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"author": "Sitegui <sitegui@sitegui.com.br>",
 	"description": "Create a ready-to-go express router for a REST API with filters, input validation, versioning, automatic routes and logging",
 	"main": "./index.js",
@@ -16,8 +16,8 @@
 	],
 	"dependencies": {
 		"body-parser": "^1.12.2",
-		"express": "^4.12.2",
-		"lift-it": "^1.0.3"
+		"express": "^4.12.3",
+		"lift-it": "^1.1.0"
 	},
 	"license": "MIT",
 	"engines": {
@@ -28,7 +28,7 @@
 	},
 	"devDependencies": {
 		"mocha": "^2.2.1",
-		"request": "^2.53.0",
+		"request": "^2.54.0",
 		"should": "^5.2.0"
 	}
 }

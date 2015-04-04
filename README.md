@@ -11,7 +11,7 @@ See on [npm](https://www.npmjs.com/package/api-lift)
 This module is built on top of [express](https://www.npmjs.com/package/express) and [lift-it](https://www.npmjs.com/package/lift-it) and *is* meant to be very opinionated.
 
 ## Status
-**WORK IN PROGRESS**
+**ALMOST STABLE**
 
 ## Assumptions
 This module is locked down by some strong assumptions:
