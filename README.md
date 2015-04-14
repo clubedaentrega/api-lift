@@ -87,6 +87,31 @@ This module uses `express` internally to create the router object. To avoid comp
 
 The parameter `body` given to `onsuccess` and `onfailure` have had any property that contains 'session', 'password', 'serial' or 'token' in its name (case-insensitive) removed (even in deep objects and arrays). This is meant to make it log-safe.
 
+## Returned router
+The output of the lifting process is an express Router instance with some added properties:
+
+* `router.minVersion`: number
+* `router.maxVersion`: number
+* `router.lastVersionIsDev`: boolean
+* `router.versions`: an array of version names (as string), ordered from oldest to newest. Example: `['v3', 'v4', 'v5-dev']`
+* `router.endpoints`: an array of objects like: `{url: string, action: Action}` (see lift-it module for details about `Action` instances)
+* `router.lifted`: a `Lifted` instance (see lift-it module)
+
+If you are not interested in the router, but in the returned meta-data (like max version), use `apiLift.info(options)` instead:
+
+```js
+var apiLift = require('api-lift')
+
+var info = apiLift.info({
+	// The default values are described bellow
+	folder: './api',
+	minVersion: 1,
+	lastVersionIsDev: false
+})
+
+info.maxVersion // a number
+```
+
 ## Versioning
 This module aims to make endpoint versioning very simple, pragmatic and source-control friendly. The system only cares about backwards-incompatible changes, that is, MAJOR changes (as defined by [semantic versioning](http://semver.org/)).
 
