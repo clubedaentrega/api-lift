@@ -33,11 +33,13 @@ describe('versions', function () {
 			versions: ['v1'],
 			endpoints: [{
 				url: '/v-last/user/create',
+				name: 'user/create',
 				versionStr: 'v-last',
 				isLast: true,
 				action: a
 			}, {
 				url: '/v1/user/create',
+				name: 'user/create',
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
@@ -65,6 +67,7 @@ describe('versions', function () {
 			versions: ['v1', 'v2', 'v3'],
 			endpoints: [{
 				url: '/v2/user/create',
+				name: 'user/create',
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
@@ -72,6 +75,7 @@ describe('versions', function () {
 				action: a
 			}, {
 				url: '/v1/user/create',
+				name: 'user/create',
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
@@ -90,6 +94,7 @@ describe('versions', function () {
 			versions: ['v1', 'v2', 'v3'],
 			endpoints: [{
 				url: '/v2/user/create',
+				name: 'user/create',
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
@@ -97,6 +102,7 @@ describe('versions', function () {
 				action: a
 			}, {
 				url: '/v1/user/create',
+				name: 'user/create',
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
@@ -104,11 +110,13 @@ describe('versions', function () {
 				action: a
 			}, {
 				url: '/v-last/user/update',
+				name: 'user/update',
 				versionStr: 'v-last',
 				isLast: true,
 				action: b
 			}, {
 				url: '/v3/user/update',
+				name: 'user/update',
 				versionStr: 'v3',
 				version: 3,
 				isLast: false,
@@ -116,6 +124,7 @@ describe('versions', function () {
 				action: b
 			}, {
 				url: '/v2/user/update',
+				name: 'user/update',
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
@@ -123,6 +132,7 @@ describe('versions', function () {
 				action: b
 			}, {
 				url: '/v1/user/update',
+				name: 'user/update',
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
@@ -150,11 +160,13 @@ describe('versions', function () {
 			versions: ['v1', 'v2'],
 			endpoints: [{
 				url: '/v-last/user/create',
+				name: 'user/create',
 				versionStr: 'v-last',
 				isLast: true,
 				action: b
 			}, {
 				url: '/v2/user/create',
+				name: 'user/create',
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
@@ -162,6 +174,7 @@ describe('versions', function () {
 				action: b
 			}, {
 				url: '/v1/user/create',
+				name: 'user/create',
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
@@ -203,11 +216,13 @@ describe('versions', function () {
 			versions: ['v1', 'v2-dev'],
 			endpoints: [{
 				url: '/v-last/user/create',
+				name: 'user/create',
 				versionStr: 'v-last',
 				isLast: true,
 				action: b
 			}, {
 				url: '/v2-dev/user/create',
+				name: 'user/create',
 				versionStr: 'v2-dev',
 				version: 2,
 				isLast: false,
@@ -215,6 +230,7 @@ describe('versions', function () {
 				action: b
 			}, {
 				url: '/v1/user/create',
+				name: 'user/create',
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
@@ -239,11 +255,13 @@ describe('versions', function () {
 			versions: ['v1-dev'],
 			endpoints: [{
 				url: '/v-last/user/create',
+				name: 'user/create',
 				versionStr: 'v-last',
 				isLast: true,
 				action: a
 			}, {
 				url: '/v1-dev/user/create',
+				name: 'user/create',
 				versionStr: 'v1-dev',
 				version: 1,
 				isLast: false,
@@ -277,11 +295,13 @@ describe('versions', function () {
 			versions: ['v1', 'v2', 'v3-dev'],
 			endpoints: [{
 				url: '/v-last/user/create',
+				name: 'user/create',
 				versionStr: 'v-last',
 				isLast: true,
 				action: a
 			}, {
 				url: '/v3-dev/user/create',
+				name: 'user/create',
 				versionStr: 'v3-dev',
 				version: 3,
 				isLast: false,
@@ -289,6 +309,7 @@ describe('versions', function () {
 				action: a
 			}, {
 				url: '/v2/user/create',
+				name: 'user/create',
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
@@ -296,6 +317,7 @@ describe('versions', function () {
 				action: b
 			}, {
 				url: '/v1/user/create',
+				name: 'user/create',
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
@@ -303,6 +325,7 @@ describe('versions', function () {
 				action: b
 			}, {
 				url: '/v1/user/old',
+				name: 'user/old',
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
@@ -310,11 +333,13 @@ describe('versions', function () {
 				action: c
 			}, {
 				url: '/v-last/user/current',
+				name: 'user/current',
 				versionStr: 'v-last',
 				isLast: true,
 				action: d
 			}, {
 				url: '/v3-dev/user/current',
+				name: 'user/current',
 				versionStr: 'v3-dev',
 				version: 3,
 				isLast: false,
@@ -322,6 +347,7 @@ describe('versions', function () {
 				action: d
 			}, {
 				url: '/v2/user/current',
+				name: 'user/current',
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
@@ -329,6 +355,7 @@ describe('versions', function () {
 				action: d
 			}, {
 				url: '/v1/user/current',
+				name: 'user/current',
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
