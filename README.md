@@ -11,7 +11,7 @@ See on [npm](https://www.npmjs.com/package/api-lift)
 This module is built on top of [express](https://www.npmjs.com/package/express) and [lift-it](https://www.npmjs.com/package/lift-it) and *is* meant to be very opinionated.
 
 ## Status
-**ALMOST STABLE**
+Stable, missing some docs
 
 ## Assumptions
 This module is locked down by some strong assumptions:
@@ -94,7 +94,7 @@ The output of the lifting process is an express Router instance with some added 
 * `router.maxVersion`: number
 * `router.lastVersionIsDev`: boolean
 * `router.versions`: an array of version names (as string), ordered from oldest to newest. Example: `['v3', 'v4', 'v5-dev']`
-* `router.endpoints`: an array of objects like: `{url: string, action: Action}` (see lift-it module for details about `Action` instances)
+* `router.endpoints`: an array of objects like: `{url: string, versionStr: string, version: string, isDev: boolean, isLast: boolean, action: Action}` (see lift-it module for details about `Action` instances)
 * `router.lifted`: a `Lifted` instance (see lift-it module)
 
 If you are not interested in the router, but in the returned meta-data (like max version), use `apiLift.info(options)` instead:
