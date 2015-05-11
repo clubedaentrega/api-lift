@@ -49,9 +49,9 @@ function prepareOptions(options) {
 
 	// Set validateOutput defaults
 	vO = options.validateOutput = options.validateOutput || {}
-	vO.exportName = vO.exportName || 'output'
-	vO.optional = vO.optional === undefined ? true : vO.optional
 	vO.direction = 'output'
+	vO.exportName = vO.exportName || 'outFields'
+	vO.optional = vO.optional === undefined ? true : vO.optional
 	vO.getDefaultValue = vO.getDefaultValue || function () {
 		return {}
 	}
