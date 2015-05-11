@@ -7,6 +7,8 @@ module.exports.fields = {
 	password: String
 }
 
+module.exports.output = {}
+
 module.exports.handler = function (body, success) {
 	success()
 }

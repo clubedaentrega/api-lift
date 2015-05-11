@@ -1,6 +1,6 @@
 # API Lift
 
-Create a ready-to-go express router for a REST API with filters, input validation, versioning, automatic routes and logging.
+Create a ready-to-go express router for a REST API with filters, input validation, output checking, versioning, automatic routes and logging.
 
 See on [npm](https://www.npmjs.com/package/api-lift)
 
@@ -24,7 +24,7 @@ This module is locked down by some strong assumptions:
 ## Features
 Okay, after complying to all the rules outlined above, you get:
 
-* Filters, input validation and profiling (by `lift-it`)
+* Filters, input validation, output checking and profiling (by `lift-it`)
 * Versioning: don't break old consumers and yet let the API evolve
 * Logging: simple logging interface to connect to any logging solution (like [log-sink](https://www.npmjs.com/package/log-sink))
 
@@ -53,6 +53,23 @@ var router = apiLift({
 		// Use the plugin defaults
 	},
 	
+	// Options for validate plugin of `lift-it`
+	validateOutput: {
+		direction: 'output', // <-- can't be changed
+		exportName: 'outFields',
+		optional: true,
+		getDefaultValue: function () {
+			return {}
+		},
+		code: 100,
+		errorHandler: function (action, value, err) {
+			throw err
+		},
+		options: {
+			strict: true
+		}
+	},
+
 	// Options for filters plugin of `lift-it`
 	filters: './filters',
 	

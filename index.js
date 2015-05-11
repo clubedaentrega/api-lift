@@ -38,16 +38,35 @@ module.exports.Error = APIError
  * @returns {Object}
  */
 function prepareOptions(options) {
+	var vO
+
 	// Set defaults
 	options = options || {}
 	options.folder = options.folder || './api'
 	options.profile = Boolean(options.profile)
 	options.lastVersionIsDev = Boolean(options.lastVersionIsDev)
 	options.validate = options.validate || {}
+
+	// Set validateOutput defaults
+	vO = options.validateOutput = options.validateOutput || {}
+	vO.exportName = vO.exportName || 'output'
+	vO.optional = vO.optional === undefined ? true : vO.optional
+	vO.direction = 'output'
+	vO.getDefaultValue = vO.getDefaultValue || function () {
+		return {}
+	}
+	vO.code = vO.code || 100
+	vO.errorHandler = vO.errorHandler || function (action, value, err) {
+		throw err
+	}
+	vO.options = vO.options || {}
+	vO.options.strict = vO.options.strict === undefined ? true : vO.options.strict
+
 	options.filters = options.filters || './filters'
 	options.minVersion = options.minVersion === undefined ? 1 : options.minVersion
 	options.onerror = options.onerror || function (action) {
 		throw action.error
 	}
+
 	return options
 }
