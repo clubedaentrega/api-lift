@@ -1,3 +1,6 @@
+# 2.0.0
+* Changed: lift-it@2.0.0
+
 # 1.3.2
 * Changed: using lift-it@1.3.2
 
