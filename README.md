@@ -177,6 +177,9 @@ The first step will snapshot `api/A.js` to `api/A-v4.js`, set `lastVersionIsDev`
 The second step will snapshot `api/B-v4.js` and change `api/B.js`. This will change the behaviour of `/v5-dev/B` accordingly. Note that this does not honor backwards compatibility, since the same endpoint (under the same URL) went through a breaking change. But who else was using this endpoint has already been advised it could happen.  
 The third step will unset `lastVersionIsDev`. This will remove support for v5-dev and enable support for v5. For this point on, v5 backwards compatibility should be ensured.
 
+## Run Info
+While processing the request, `process.domain.runInfo` is an express request instance. `req.requestId` is a string, unique for each request. As a result, in any async process created by the request, `process.domain.runInfo.requestId` can be used. Useful for logs, for example.
+
 ## Logging
 TODO
 

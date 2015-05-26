@@ -1,5 +1,7 @@
 'use strict'
 
+var assert = require('assert')
+
 module.exports.description = 'Create a user. Do not check for weak passwords. Deprecated'
 
 module.exports.fields = {
@@ -10,5 +12,7 @@ module.exports.fields = {
 module.exports.output = {}
 
 module.exports.handler = function (body, success) {
+	assert(process.domain.runInfo.requestId.length === 24)
+
 	success()
 }
