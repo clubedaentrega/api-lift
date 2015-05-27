@@ -1,3 +1,9 @@
+# 2.1.0
+* Added: `req.requestId`, a string unique for each request
+* Added: made the express request object available as global, in `process.domain.runInfo`
+* Added: `dataScrub` option, to give control over which fields should be scrubbed in the body
+* Changed: instead of removing sensitive fields, change them to `'[HIDDEN]'`
+
 # 2.0.0
 * Changed: lift-it@2.0.0
 
