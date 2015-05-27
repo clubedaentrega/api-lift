@@ -57,11 +57,12 @@ describe('api', function () {
 			})
 			req.should.be.an.Object
 			body.should.be.eql({
-				name: 'Gui'
+				name: 'Gui',
+				password: '[HIDDEN]'
 			})
 			action.name.should.be.eql('user/create-v1')
-			done()
 			options.onsuccess = null
+			done()
 		}
 		call('v1/user/create', body)
 	})
@@ -71,12 +72,13 @@ describe('api', function () {
 			response.failure.code.should.be.equal(101)
 			req.should.be.an.Object
 			body.should.be.eql({
-				name: 'Gui'
+				name: 'Gui',
+				password: '[HIDDEN]'
 			})
 			action.name.should.be.eql('user/create')
 			error.code.should.be.equal(101)
-			done()
 			options.onfailure = null
+			done()
 		}
 		call('v2/user/create', body)
 	})

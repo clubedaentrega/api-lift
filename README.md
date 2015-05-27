@@ -76,6 +76,7 @@ var router = apiLift({
 	// Options for this module
 	minVersion: 1, // the min version to support
 	lastVersionIsDev: false, // whether the last version is in development stage
+	dataScrub: [/session|password|serial|token/i], // describe fields to hide in the body
 	onsuccess: function (response, req, body, action) {
 		// Called right before a request is answered with success
 		// `response` is the JSON object to send
@@ -102,7 +103,7 @@ require('http').createServer(app).listen(80)
 
 This module uses `express` internally to create the router object. To avoid compatibility problems, it's adviced to use the same lib this module is using. This is exported as `require('api-lift').express`
 
-The parameter `body` given to `onsuccess` and `onfailure` have had any property that contains 'session', 'password', 'serial' or 'token' in its name (case-insensitive) removed (even in deep objects and arrays). This is meant to make it log-safe.
+The parameter `body` given to `onsuccess` and `onfailure` has properties matching one of the regular expressions in `dataScrub` scrubbed (even in deep objects and arrays). This is meant to make it log-safe. Example: `{password: '123456'}` becomes `{password: '[HIDDEN]'}`
 
 ## Returned router
 The output of the lifting process is an express Router instance with some added properties:

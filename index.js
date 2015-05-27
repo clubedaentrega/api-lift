@@ -45,6 +45,7 @@ function prepareOptions(options) {
 	options.folder = options.folder || './api'
 	options.profile = Boolean(options.profile)
 	options.lastVersionIsDev = Boolean(options.lastVersionIsDev)
+	options.dataScrub = options.dataScrub || [/session|password|serial|token/i]
 	options.validate = options.validate || {}
 
 	// Set validateOutput defaults
