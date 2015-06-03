@@ -110,7 +110,7 @@ The output of the lifting process is an express Router instance with some added 
 * `router.minVersion`: number
 * `router.maxVersion`: number
 * `router.versions`: an array of version names (as string), ordered from oldest to newest. Example: `['v3', 'v4']`
-* `router.endpoints`: an array of objects like: `{url: string, name: string, versionStr: string, version: string, isLast: boolean, action: Action}` (see lift-it module for details about `Action` instances)
+* `router.endpoints`: an array of objects like: `{url: string, name: string, versionStr: string, version: number, action: Action}` (see lift-it module for details about `Action` instances)
 * `router.lifted`: a `Lifted` instance (see lift-it module)
 
 If you are not interested in the router, but in the returned meta-data (like max version), use `apiLift.info(options)` instead:
@@ -136,8 +136,6 @@ Note that the v1 file is like a snapshot. From the point of view of a revision c
 
 After some time, the support for version 1 may be dropped, by increasing the `minVersion` option and removing old v1 files.
 
-If needed, the most recent version is available under `v-last`, like `/v-last/user/create`.
-
 ### Complete example
 For the following files in the api folder:
 ```
@@ -158,7 +156,7 @@ Assuming `minVersion` is 1, those endpoints will be created:
 /v2
 	/user/create -> api/user/create-v2.js
 	/user/getinfo -> api/user/getinfo.js
-/v3 and /v-last
+/v3
 	/user/create -> api/user/create.js
 	/user/getinfo -> api/user/getinfo.js
 ```

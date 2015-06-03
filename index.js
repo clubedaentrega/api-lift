@@ -26,7 +26,7 @@ module.exports = function (options) {
  */
 module.exports.info = function (options) {
 	options = prepareOptions(options)
-	return versions(options, lift.lean(options).actions)
+	return versions(options.minVersion, lift.lean(options).actions)
 }
 
 module.exports.express = express

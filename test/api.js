@@ -10,7 +10,7 @@ var apiLift = require('../'),
 		name: 'Gui',
 		password: '123'
 	},
-	router, server, baseUrl, options
+	api, server, baseUrl, options
 
 describe('api', function () {
 	it('should lift and call onerror', function () {
@@ -22,12 +22,12 @@ describe('api', function () {
 				ok = true
 			}
 		}
-		router = apiLift(options)
+		api = apiLift(options)
 		ok.should.be.true
 	})
 
 	it('should start a server', function (done) {
-		app.use(router)
+		app.use(api.router)
 		server = http.createServer(app).listen(0, function () {
 			baseUrl = 'http://localhost:' + server.address().port + '/'
 			done()
@@ -51,7 +51,7 @@ describe('api', function () {
 	})
 
 	it('should call onsuccess', function (done) {
-		options.onsuccess = function (response, req, body, action) {
+		api.onsuccess = function (response, req, body, action) {
 			response.should.be.eql({
 				failure: null
 			})
@@ -61,14 +61,14 @@ describe('api', function () {
 				password: '[HIDDEN]'
 			})
 			action.name.should.be.eql('user/create-v1')
-			options.onsuccess = null
+			api.onsuccess = null
 			done()
 		}
 		call('v1/user/create', body)
 	})
 
 	it('should call onfailure', function (done) {
-		options.onfailure = function (response, req, body, action, error) {
+		api.onfailure = function (response, req, body, action, error) {
 			response.failure.code.should.be.equal(101)
 			req.should.be.an.Object
 			body.should.be.eql({
@@ -77,7 +77,7 @@ describe('api', function () {
 			})
 			action.name.should.be.eql('user/create')
 			error.code.should.be.equal(101)
-			options.onfailure = null
+			api.onfailure = null
 			done()
 		}
 		call('v2/user/create', body)

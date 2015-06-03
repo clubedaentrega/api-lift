@@ -2,6 +2,8 @@
 
 ## Breaking changes
 * Dev mode removed (`lastVersionIsDev` flag), since it was too awkward to work with it. If a version is considered in development, it should be noted in the provider docs.
+* `apiLift()` now returns an `API` instance, instead of an express router. To access the router, use `api.router`
+* `v-last` is not explicity listed in the `endpoints` array anymore
 
 # 2.1.0
 * Added: `req.requestId`, a string unique for each request
