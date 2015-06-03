@@ -1,3 +1,8 @@
+# next
+
+## Breaking changes
+* Dev mode removed (`lastVersionIsDev` flag), since it was too awkward to work with it. If a version is considered in development, it should be noted in the provider docs.
+
 # 2.1.0
 * Added: `req.requestId`, a string unique for each request
 * Added: made the express request object available as global, in `process.domain.runInfo`

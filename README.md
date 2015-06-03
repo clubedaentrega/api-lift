@@ -75,7 +75,6 @@ var router = apiLift({
 	
 	// Options for this module
 	minVersion: 1, // the min version to support
-	lastVersionIsDev: false, // whether the last version is in development stage
 	dataScrub: [/session|password|serial|token/i], // describe fields to hide in the body
 	onsuccess: function (response, req, body, action) {
 		// Called right before a request is answered with success
@@ -110,9 +109,8 @@ The output of the lifting process is an express Router instance with some added 
 
 * `router.minVersion`: number
 * `router.maxVersion`: number
-* `router.lastVersionIsDev`: boolean
-* `router.versions`: an array of version names (as string), ordered from oldest to newest. Example: `['v3', 'v4', 'v5-dev']`
-* `router.endpoints`: an array of objects like: `{url: string, name: string, versionStr: string, version: string, isDev: boolean, isLast: boolean, action: Action}` (see lift-it module for details about `Action` instances)
+* `router.versions`: an array of version names (as string), ordered from oldest to newest. Example: `['v3', 'v4']`
+* `router.endpoints`: an array of objects like: `{url: string, name: string, versionStr: string, version: string, isLast: boolean, action: Action}` (see lift-it module for details about `Action` instances)
 * `router.lifted`: a `Lifted` instance (see lift-it module)
 
 If you are not interested in the router, but in the returned meta-data (like max version), use `apiLift.info(options)` instead:
@@ -123,8 +121,7 @@ var apiLift = require('api-lift')
 var info = apiLift.info({
 	// The default values are described bellow
 	folder: './api',
-	minVersion: 1,
-	lastVersionIsDev: false
+	minVersion: 1
 })
 
 info.maxVersion // a number
@@ -139,7 +136,7 @@ Note that the v1 file is like a snapshot. From the point of view of a revision c
 
 After some time, the support for version 1 may be dropped, by increasing the `minVersion` option and removing old v1 files.
 
-If needed, the most recent version, including development versions, is available under `v-last`, like `/v-last/user/create`.
+If needed, the most recent version is available under `v-last`, like `/v-last/user/create`.
 
 ### Complete example
 For the following files in the api folder:
@@ -167,16 +164,6 @@ Assuming `minVersion` is 1, those endpoints will be created:
 ```
 
 The file `api/user/getinfo.js` is available in all versions. `api/user/create-v2.js` is the snapshot for v1 and v2, `api/user/create.js` is used in v3. `api/user/findbyname-v1.js` is the snapshot for v1 only and is not available in next versions.
-
-### Development version
-The last version may be in development stage and not yet ready to provide backwards compatible coverage. In this situation `options.lastVersionIsDev` should be set to `true`. This will let the team work on a bigger feature and warn possible consumers that the version is under active development and backwards compatibility may not be honored.
-
-An example to ilustrate and help understand its use:  
-Imagine two endpoints `/v4/A` (file `api/A.js`) and `/v4/B` (file `api/B.js`), both at the current version (v4). The next version (v5) will bring breaking changes to both. The implementation will happen in three steps.  
-The first step will snapshot `api/A.js` to `api/A-v4.js`, set `lastVersionIsDev` and then change
-`api/A.js`. This step alone will bump the current version to v5-dev, keep old v4 routes working as before and route `/v5-dev/A` to the new implementation. At this point `/v5-dev/B` will map to old (v4) behaviour, since the action `/api/B.js` remained the same in this first step.  
-The second step will snapshot `api/B-v4.js` and change `api/B.js`. This will change the behaviour of `/v5-dev/B` accordingly. Note that this does not honor backwards compatibility, since the same endpoint (under the same URL) went through a breaking change. But who else was using this endpoint has already been advised it could happen.  
-The third step will unset `lastVersionIsDev`. This will remove support for v5-dev and enable support for v5. For this point on, v5 backwards compatibility should be ensured.
 
 ## Run Info
 While processing the request, `process.domain.runInfo` is an express request instance. `req.requestId` is a string, unique for each request. As a result, in any async process created by the request, `process.domain.runInfo.requestId` can be used. Useful for logs, for example.

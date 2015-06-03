@@ -7,12 +7,10 @@ require('should')
 describe('versions', function () {
 	it('should return an empty set if no action is given', function () {
 		versions({
-			minVersion: 0,
-			lastVersionIsDev: false
+			minVersion: 0
 		}, []).should.be.eql({
 			minVersion: 0,
 			maxVersion: 0,
-			lastVersionIsDev: false,
 			versions: ['v0'],
 			endpoints: []
 		})
@@ -24,12 +22,10 @@ describe('versions', function () {
 		}
 
 		versions({
-			minVersion: 1,
-			lastVersionIsDev: false
+			minVersion: 1
 		}, [a]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 1,
-			lastVersionIsDev: false,
 			versions: ['v1'],
 			endpoints: [{
 				url: '/v-last/user/create',
@@ -43,7 +39,6 @@ describe('versions', function () {
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
-				isDev: false,
 				action: a
 			}]
 		})
@@ -58,12 +53,10 @@ describe('versions', function () {
 			}
 
 		versions({
-			minVersion: 1,
-			lastVersionIsDev: false
+			minVersion: 1
 		}, [a]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 3,
-			lastVersionIsDev: false,
 			versions: ['v1', 'v2', 'v3'],
 			endpoints: [{
 				url: '/v2/user/create',
@@ -71,7 +64,6 @@ describe('versions', function () {
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
-				isDev: false,
 				action: a
 			}, {
 				url: '/v1/user/create',
@@ -79,18 +71,15 @@ describe('versions', function () {
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
-				isDev: false,
 				action: a
 			}]
 		})
 
 		versions({
-			minVersion: 1,
-			lastVersionIsDev: false
+			minVersion: 1
 		}, [a, b]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 3,
-			lastVersionIsDev: false,
 			versions: ['v1', 'v2', 'v3'],
 			endpoints: [{
 				url: '/v2/user/create',
@@ -98,7 +87,6 @@ describe('versions', function () {
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
-				isDev: false,
 				action: a
 			}, {
 				url: '/v1/user/create',
@@ -106,7 +94,6 @@ describe('versions', function () {
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
-				isDev: false,
 				action: a
 			}, {
 				url: '/v-last/user/update',
@@ -120,7 +107,6 @@ describe('versions', function () {
 				versionStr: 'v3',
 				version: 3,
 				isLast: false,
-				isDev: false,
 				action: b
 			}, {
 				url: '/v2/user/update',
@@ -128,7 +114,6 @@ describe('versions', function () {
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
-				isDev: false,
 				action: b
 			}, {
 				url: '/v1/user/update',
@@ -136,7 +121,6 @@ describe('versions', function () {
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
-				isDev: false,
 				action: b
 			}]
 		})
@@ -151,12 +135,10 @@ describe('versions', function () {
 			}
 
 		versions({
-			minVersion: 1,
-			lastVersionIsDev: false
+			minVersion: 1
 		}, [a, b]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 2,
-			lastVersionIsDev: false,
 			versions: ['v1', 'v2'],
 			endpoints: [{
 				url: '/v-last/user/create',
@@ -170,7 +152,6 @@ describe('versions', function () {
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
-				isDev: false,
 				action: b
 			}, {
 				url: '/v1/user/create',
@@ -178,7 +159,6 @@ describe('versions', function () {
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
-				isDev: false,
 				action: a
 			}]
 		})
@@ -190,85 +170,11 @@ describe('versions', function () {
 			},
 			boom = function () {
 				versions({
-					minVersion: 3,
-					lastVersionIsDev: false
+					minVersion: 3
 				}, [a])
 			}
 
 		boom.should.throw('Uhm... You have told me the minimum version you want to support is 3 but the file user/create-v2 violates this. You must either decrease the min version value or remove the offending file')
-	})
-
-	it('should create dev routes', function () {
-		var a = {
-				name: 'user/create-v1'
-			},
-			b = {
-				name: 'user/create'
-			}
-
-		versions({
-			minVersion: 1,
-			lastVersionIsDev: true
-		}, [a, b]).should.be.eql({
-			minVersion: 1,
-			maxVersion: 2,
-			lastVersionIsDev: true,
-			versions: ['v1', 'v2-dev'],
-			endpoints: [{
-				url: '/v-last/user/create',
-				name: 'user/create',
-				versionStr: 'v-last',
-				isLast: true,
-				action: b
-			}, {
-				url: '/v2-dev/user/create',
-				name: 'user/create',
-				versionStr: 'v2-dev',
-				version: 2,
-				isLast: false,
-				isDev: true,
-				action: b
-			}, {
-				url: '/v1/user/create',
-				name: 'user/create',
-				versionStr: 'v1',
-				version: 1,
-				isLast: false,
-				isDev: false,
-				action: a
-			}]
-		})
-	})
-
-	it('should work when there is no stable version', function () {
-		var a = {
-			name: 'user/create'
-		}
-
-		versions({
-			minVersion: 1,
-			lastVersionIsDev: true
-		}, [a]).should.be.eql({
-			minVersion: 1,
-			maxVersion: 1,
-			lastVersionIsDev: true,
-			versions: ['v1-dev'],
-			endpoints: [{
-				url: '/v-last/user/create',
-				name: 'user/create',
-				versionStr: 'v-last',
-				isLast: true,
-				action: a
-			}, {
-				url: '/v1-dev/user/create',
-				name: 'user/create',
-				versionStr: 'v1-dev',
-				version: 1,
-				isLast: false,
-				isDev: true,
-				action: a
-			}]
-		})
 	})
 
 	it('should work for all together', function () {
@@ -286,13 +192,11 @@ describe('versions', function () {
 			}
 
 		versions({
-			minVersion: 1,
-			lastVersionIsDev: true
+			minVersion: 1
 		}, [a, b, c, d]).should.be.eql({
 			minVersion: 1,
 			maxVersion: 3,
-			lastVersionIsDev: true,
-			versions: ['v1', 'v2', 'v3-dev'],
+			versions: ['v1', 'v2', 'v3'],
 			endpoints: [{
 				url: '/v-last/user/create',
 				name: 'user/create',
@@ -300,12 +204,11 @@ describe('versions', function () {
 				isLast: true,
 				action: a
 			}, {
-				url: '/v3-dev/user/create',
+				url: '/v3/user/create',
 				name: 'user/create',
-				versionStr: 'v3-dev',
+				versionStr: 'v3',
 				version: 3,
 				isLast: false,
-				isDev: true,
 				action: a
 			}, {
 				url: '/v2/user/create',
@@ -313,7 +216,6 @@ describe('versions', function () {
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
-				isDev: false,
 				action: b
 			}, {
 				url: '/v1/user/create',
@@ -321,7 +223,6 @@ describe('versions', function () {
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
-				isDev: false,
 				action: b
 			}, {
 				url: '/v1/user/old',
@@ -329,7 +230,6 @@ describe('versions', function () {
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
-				isDev: false,
 				action: c
 			}, {
 				url: '/v-last/user/current',
@@ -338,12 +238,11 @@ describe('versions', function () {
 				isLast: true,
 				action: d
 			}, {
-				url: '/v3-dev/user/current',
+				url: '/v3/user/current',
 				name: 'user/current',
-				versionStr: 'v3-dev',
+				versionStr: 'v3',
 				version: 3,
 				isLast: false,
-				isDev: true,
 				action: d
 			}, {
 				url: '/v2/user/current',
@@ -351,7 +250,6 @@ describe('versions', function () {
 				versionStr: 'v2',
 				version: 2,
 				isLast: false,
-				isDev: false,
 				action: d
 			}, {
 				url: '/v1/user/current',
@@ -359,7 +257,6 @@ describe('versions', function () {
 				versionStr: 'v1',
 				version: 1,
 				isLast: false,
-				isDev: false,
 				action: d
 			}]
 		})
