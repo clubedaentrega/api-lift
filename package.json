@@ -26,7 +26,8 @@
 	},
 	"scripts": {
 		"test": "mocha test -b",
-		"docs": "rm -rf docs && jsdoc -d docs -c docs.json -R README.md"
+		"docs": "rm -rf docs2 && jsdoc -d docs2 -c docs.json -R README.md",
+		"commit-docs": "npm run docs && git checkout gh-pages && rm -rf docs && mv docs2 docs && git add docs -A && git commit"
 	},
 	"devDependencies": {
 		"mocha": "^2.2.5",
