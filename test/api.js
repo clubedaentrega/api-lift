@@ -51,16 +51,24 @@ describe('api', function () {
 	})
 
 	it('should call onsuccess', function (done) {
-		api._onsuccess = function (response, req, body, action) {
+		api._onsuccess = function (response, runInfo, body, endpoint) {
 			response.should.be.eql({
 				failure: null
 			})
-			req.should.be.an.Object
+
+			runInfo.should.be.an.Object
+			runInfo.req.should.be.an.Object
+			runInfo.requestId.should.be.a.String.with.length(24)
+			runInfo.beginTime.should.be.a.Number
+
 			body.should.be.eql({
 				name: 'Gui',
 				password: '[HIDDEN]'
 			})
-			action.name.should.be.eql('user/create-v1')
+
+			endpoint.name.should.be.equal('user/create')
+			endpoint.action.name.should.be.equal('user/create-v1')
+
 			api._onsuccess = null
 			done()
 		}
@@ -68,14 +76,22 @@ describe('api', function () {
 	})
 
 	it('should call onfailure', function (done) {
-		api._onfailure = function (response, req, body, action, error) {
+		api._onfailure = function (response, runInfo, body, endpoint, error) {
 			response.failure.code.should.be.equal(101)
-			req.should.be.an.Object
+
+			runInfo.should.be.an.Object
+			runInfo.req.should.be.an.Object
+			runInfo.requestId.should.be.a.String.with.length(24)
+			runInfo.beginTime.should.be.a.Number
+
 			body.should.be.eql({
 				name: 'Gui',
 				password: '[HIDDEN]'
 			})
-			action.name.should.be.eql('user/create')
+
+			endpoint.name.should.be.equal('user/create')
+			endpoint.action.name.should.be.equal('user/create')
+
 			error.code.should.be.equal(101)
 			api._onfailure = null
 			done()

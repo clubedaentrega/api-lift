@@ -76,19 +76,21 @@ var api = apiLift({
 	// Options for this module
 	minVersion: 1, // the min version to support
 	dataScrub: [/session|password|serial|token/i], // describe fields to hide in the body
-	onsuccess: function (response, req, body, action) {
+	onsuccess: function (response, runInfo, body, endpoint) {
 		// Called right before a request is answered with success
 		// `response` is the JSON object to send
-		// `req` is the express request object
-		// `req.beginTime` is the value of Date.now() when the request was received
-		// `req.profileData` is the profile data (if enabled)
+		// `runInfo` carries data about the execution
+		// `runInfo.req` is the express request object (if routed with express)
+		// `runInfo.requestId` a unique identifier for this execution
+		// `runInfo.beginTime` is the value of Date.now() when the request was received
+		// `runInfo.profileData` is the profile data (if enabled)
 		// `body` is the cleaned (see bellow) JSON input
-		// `action` is the lift-it action object
+		// `endpoint` is the instance of the executed Endpoint
 	},
-	onfailure: function (response, req, body, action, error) {
+	onfailure: function (response, runInfo, body, endpoint, error) {
 		// Called right before a request is answered with error
-		// `response`, `req`, `body` and `action` behave the same as onsuccess
-		// `action` may be undefined if the error is not linked to any action
+		// `response`, `runInfo`, `body` and `endpoint` behave the same as onsuccess
+		// `endpoint` may be undefined if the error is not linked to any
 		// `error` is the original error object
 	}
 })

@@ -1,3 +1,10 @@
+# 4.0.0
+
+## Breaking changes
+* `onsuccess` and `onfailure` now receive `runInfo` instead of `req` as second parameter. To access the express request, use `runInfo.req`.
+* `onsuccess` and `onfailure` now receive `endpoint` instead of `action` as forth parameter. To access the action, use `endpoint.action`.
+* Removed `body._req`. To access the request, use `process.domain.runInfo.req`.
+
 # 3.0.0
 
 ## Breaking changes

@@ -40,8 +40,11 @@ module.exports = function (options) {
 	// Prepare express middlewares
 	api.router.use(function (req, res, next) {
 		// Save the time at the beggining
-		req.beginTime = Date.now()
-		req.requestId = genId()
+		req.runInfo = {
+			beginTime: Date.now(),
+			requestId: genId(),
+			req: req
+		}
 
 		if (req.method === 'POST' && !req.is('json')) {
 			return next(APIError.create(101,
@@ -62,12 +65,7 @@ module.exports = function (options) {
 			return next()
 		}
 
-		// Make the req accessible through body
-		Object.defineProperty(req.body, '_req', {
-			value: req
-		})
-
-		api.run(req.url, req.body, req, function (out) {
+		api.run(req.url, req.body, req.runInfo, function (out) {
 			res.json(out)
 		})
 	})
@@ -79,7 +77,7 @@ module.exports = function (options) {
 			// JSON parsing error
 			err = APIError.create(101, 'Invalid JSON: ' + err)
 		}
-		api._handleError(err, req.body, req, function (out) {
+		api._handleError(err, req.body, req.runInfo, null, function (out) {
 			res.json(out)
 		})
 	})
