@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>API Lift</h1><p>Create a ready-to-go express router for a REST API with filters, input validation, output checking, versioning, automatic routes and logging.</p>
+<p>See on <a href="https://www.npmjs.com/package/api-lift">npm</a></p>
+<h2>Install</h2><p><code>npm install api-lift --save</code></p>
+<h2>Important note</h2><p>This module is built on top of <a href="https://www.npmjs.com/package/express">express</a> and <a href="https://www.npmjs.com/package/lift-it">lift-it</a> and <em>is</em> meant to be very opinionated.</p>
+<h2>Status</h2><p>Stable, missing some docs</p>
+<h2>Assumptions</h2><p>This module is locked down by some strong assumptions:</p>
+<ul>
+<li>The routes are created and named after the files in the file system</li>
+<li>The endpoints are to be implemented as supported by <a href="https://www.npmjs.com/package/lift-it">lift-it</a>. See details in section &quot;Endpoint handler&quot;</li>
+<li>All routes only answer POST requests. All input and output is JSON</li>
+<li>Standard output for success: <code>{failure:null}</code>, for error: <code>{failure:{code:Number,message:String}}</code></li>
+</ul>
+<h2>Features</h2><p>Okay, after complying to all the rules outlined above, you get:</p>
+<ul>
+<li>Filters, input validation, output checking and profiling (by <code>lift-it</code>)</li>
+<li>Versioning: don't break old consumers and yet let the API evolve</li>
+<li>Logging: simple logging interface to connect to any logging solution (like <a href="https://www.npmjs.com/package/log-sink">log-sink</a>)</li>
+</ul>
+<h2>Options</h2><pre class="prettyprint source lang-js"><code>var apiLift = require('api-lift')
+
+var api = apiLift({
+    // All options are optional :P
+    // The default values are described bellow
+    // Some are not configurable and can not be changed,
+    // those are listed only for your information
+
+    // Options for `lift-it`
+    folder: './api',
+    profile: false,
+    errorClass: apiLift.Error, // &lt;-- can't be changed
+    enableErrorCode: true, // &lt;-- can't be changed
+    onerror: function (action) {
+        // Called for each action (ie, file) that fails to be lifted
+        throw action.error
+    },
+
+    // Options for validate plugin of `lift-it`
+    validate: {
+        // Use the plugin defaults
+    },
+
+    // Options for validate plugin of `lift-it`
+    validateOutput: {
+        direction: 'output', // &lt;-- can't be changed
+        exportName: 'outFields',
+        optional: true,
+        getDefaultValue: function () {
+            return {}
+        },
+        code: 100,
+        errorHandler: function (action, value, err) {
+            throw err
+        },
+        options: {
+            strict: true
+        }
+    },
+
+    // Options for filters plugin of `lift-it`
+    filters: './filters',
+
+    // Options for this module
+    minVersion: 1, // the min version to support
+    dataScrub: [/session|password|serial|token/i], // describe fields to hide in the body
+    onsuccess: function (response, req, body, action) {
+        // Called right before a request is answered with success
+        // `response` is the JSON object to send
+        // `req` is the express request object
+        // `req.beginTime` is the value of Date.now() when the request was received
+        // `req.profileData` is the profile data (if enabled)
+        // `body` is the cleaned (see bellow) JSON input
+        // `action` is the lift-it action object
+    },
+    onfailure: function (response, req, body, action, error) {
+        // Called right before a request is answered with error
+        // `response`, `req`, `body` and `action` behave the same as onsuccess
+        // `action` may be undefined if the error is not linked to any action
+        // `error` is the original error object
+    }
+})
+
+// `api.router` is an express router object
+// You can, for example:
+var app = apiLift.express() // see note bellow about apiLift.express
+app.use('/api', api.router)
+require('http').createServer(app).listen(80)</code></pre><p>This module uses <code>express</code> internally to create the router object. To avoid compatibility problems, it's adviced to use the same lib this module is using. This is exported as <code>require('api-lift').express</code></p>
+<p>The parameter <code>body</code> given to <code>onsuccess</code> and <code>onfailure</code> has properties matching one of the regular expressions in <code>dataScrub</code> scrubbed (even in deep objects and arrays). This is meant to make it log-safe. Example: <code>{password: '123456'}</code> becomes <code>{password: '[HIDDEN]'}</code></p>
+<h2>Returned value</h2><p>The return of <code>apiLift()</code> call is an instance of <code>API</code>. Its properties are:</p>
+<ul>
+<li><code>{express:Router} router</code>: an express Router instance</li>
+<li><code>{number} minVersion</code>: the minimum supported version</li>
+<li><code>{number} maxVersion</code>: the maximum supported version</li>
+<li><code>{Array&lt;string&gt;} versions</code>: The list of supported versions, ordered from oldest to newest. Example: <code>['v3', 'v4']</code></li>
+<li><code>{Array&lt;Endpoint&gt;} endpoints</code>: the list of available endpoints</li>
+<li><code>{Object&lt;Endpoint&gt;} endpointByUrl</code>: a map from url to an Endpoint instance</li>
+</ul>
+<p>If you are not interested in the router, but in the returned meta-data (like max version), use <code>apiLift.info(options)</code> instead:</p>
+<pre class="prettyprint source lang-js"><code>var apiLift = require('api-lift')
+
+var info = apiLift.info({
+    // The default values are described bellow
+    folder: './api',
+    minVersion: 1
+})
+
+info.maxVersion // a number</code></pre><h2>Generated Doc</h2><p>All public methods and properties are described in the <a href="http://clubedaentrega.github.io/api-lift">generated docs</a></p>
+<h3>Endpoint</h3><h2>Versioning</h2><p>This module aims to make endpoint versioning very simple, pragmatic and source-control friendly. The system only cares about backwards-incompatible changes, that is, MAJOR changes (as defined by <a href="http://semver.org/">semantic versioning</a>).</p>
+<p>By default (<code>options.minVersion</code>), all endpoints start at version 1. That is, a file in the path <code>api/user/create.js</code> is served at the url <code>/v1/user/create</code>. If a breaking change is to be made in this endpoint, the API version must be bumped to 2. To do this, the current file is copied to <code>api/user/create-v1.js</code> and new changes can be freely applied to the current <code>api/user/create.js</code> file. The new url will be <code>/v2/user/create</code> and will be mapped to the current file. The old url will keep working and will point to the old v1 file. Any other endpoint that hasn't been changed will be served equally in v1 and v2. Magic!</p>
+<p>Note that the v1 file is like a snapshot. From the point of view of a revision control system (like git), the file has evolved linearly: no move/rename or any other trick (like symlinks).</p>
+<p>After some time, the support for version 1 may be dropped, by increasing the <code>minVersion</code> option and removing old v1 files.</p>
+<h3>Complete example</h3><p>For the following files in the api folder:</p>
+<pre class="prettyprint source"><code>api
+    user
+        create.js
+        create-v2.js
+        findbyname-v1.js
+        getinfo.js</code></pre><p>Assuming <code>minVersion</code> is 1, those endpoints will be created:</p>
+<pre class="prettyprint source"><code>/v1
+    /user/create -> api/user/create-v2.js
+    /user/findbyname -> api/user/findbyname-v1.js
+    /user/getinfo -> api/user/getinfo.js
+/v2
+    /user/create -> api/user/create-v2.js
+    /user/getinfo -> api/user/getinfo.js
+/v3
+    /user/create -> api/user/create.js
+    /user/getinfo -> api/user/getinfo.js</code></pre><p>The file <code>api/user/getinfo.js</code> is available in all versions. <code>api/user/create-v2.js</code> is the snapshot for v1 and v2, <code>api/user/create.js</code> is used in v3. <code>api/user/findbyname-v1.js</code> is the snapshot for v1 only and is not available in next versions.</p>
+<h2>Run Info</h2><p>While processing the request, <code>process.domain.runInfo</code> is an express request instance. <code>req.requestId</code> is a string, unique for each request. As a result, in any async process created by the request, <code>process.domain.runInfo.requestId</code> can be used. Useful for logs, for example.</p>
+<h2>Logging</h2><p>TODO</p>
+<h2>Endpoint handler</h2><p>TODO</p>
+<h2>Error codes</h2><p>TODO</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-api-lift.html">api-lift</a></li></ul><h3>Externals</h3><ul><li><a href="external-express.html">express</a></li><li><a href="external-lift-it.html">lift-it</a></li></ul><h3>Classes</h3><ul><li><a href="API.html">API</a></li><li><a href="APIError.html">APIError</a></li><li><a href="Endpoint.html">Endpoint</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0</a> on Sat Jun 06 2015 23:40:48 GMT-0300 (Hora oficial do Brasil)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
