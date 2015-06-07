@@ -129,9 +129,7 @@ info.maxVersion // a number
 ```
 
 ## Generated Doc
-All public methods and properties are described in the [generated docs](http://clubedaentrega.github.io/api-lift)
-
-### Endpoint
+All public methods and properties are described in the [generated docs](http://clubedaentrega.github.io/api-lift/docs)
 
 ## Versioning
 This module aims to make endpoint versioning very simple, pragmatic and source-control friendly. The system only cares about backwards-incompatible changes, that is, MAJOR changes (as defined by [semantic versioning](http://semver.org/)).
