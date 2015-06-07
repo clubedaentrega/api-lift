@@ -115,6 +115,18 @@ describe('api', function () {
 			done()
 		})
 	})
+
+	it('should expose the run() method to call endpoints', function (done) {
+		api.run('/v2/user/create', body, function (out) {
+			out.should.be.eql({
+				failure: {
+					code: 101,
+					message: 'I was expecting at least 6 chars in password'
+				}
+			})
+			done()
+		})
+	})
 })
 
 /**
