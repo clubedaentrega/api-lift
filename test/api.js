@@ -51,7 +51,7 @@ describe('api', function () {
 	})
 
 	it('should call onsuccess', function (done) {
-		api.onsuccess = function (response, req, body, action) {
+		api._onsuccess = function (response, req, body, action) {
 			response.should.be.eql({
 				failure: null
 			})
@@ -61,14 +61,14 @@ describe('api', function () {
 				password: '[HIDDEN]'
 			})
 			action.name.should.be.eql('user/create-v1')
-			api.onsuccess = null
+			api._onsuccess = null
 			done()
 		}
 		call('v1/user/create', body)
 	})
 
 	it('should call onfailure', function (done) {
-		api.onfailure = function (response, req, body, action, error) {
+		api._onfailure = function (response, req, body, action, error) {
 			response.failure.code.should.be.equal(101)
 			req.should.be.an.Object
 			body.should.be.eql({
@@ -77,7 +77,7 @@ describe('api', function () {
 			})
 			action.name.should.be.eql('user/create')
 			error.code.should.be.equal(101)
-			api.onfailure = null
+			api._onfailure = null
 			done()
 		}
 		call('v2/user/create', body)
