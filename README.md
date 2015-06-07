@@ -32,7 +32,7 @@ Okay, after complying to all the rules outlined above, you get:
 ```js
 var apiLift = require('api-lift')
 
-var router = apiLift({
+var api = apiLift({
 	// All options are optional :P
 	// The default values are described bellow
 	// Some are not configurable and can not be changed,
@@ -93,10 +93,10 @@ var router = apiLift({
 	}
 })
 
-// `router` is an express router object
+// `api.router` is an express router object
 // You can, for example:
 var app = apiLift.express() // see note bellow about apiLift.express
-app.use('/api', router)
+app.use('/api', api.router)
 require('http').createServer(app).listen(80)
 ```
 
@@ -104,14 +104,15 @@ This module uses `express` internally to create the router object. To avoid comp
 
 The parameter `body` given to `onsuccess` and `onfailure` has properties matching one of the regular expressions in `dataScrub` scrubbed (even in deep objects and arrays). This is meant to make it log-safe. Example: `{password: '123456'}` becomes `{password: '[HIDDEN]'}`
 
-## Returned router
-The output of the lifting process is an express Router instance with some added properties:
+## Returned value
+The return of `apiLift()` call is an instance of `API`. Its properties are:
 
-* `router.minVersion`: number
-* `router.maxVersion`: number
-* `router.versions`: an array of version names (as string), ordered from oldest to newest. Example: `['v3', 'v4']`
-* `router.endpoints`: an array of objects like: `{url: string, name: string, versionStr: string, version: number, action: Action}` (see lift-it module for details about `Action` instances)
-* `router.lifted`: a `Lifted` instance (see lift-it module)
+* `{express:Router} router`: an express Router instance
+* `{number} minVersion`: the minimum supported version
+* `{number} maxVersion`: the maximum supported version
+* `{Array<string>} versions`: The list of supported versions, ordered from oldest to newest. Example: `['v3', 'v4']`
+* `{Array<Endpoint>} endpoints`: the list of available endpoints
+* `{Object<Endpoint>} endpointByUrl`: a map from url to an Endpoint instance
 
 If you are not interested in the router, but in the returned meta-data (like max version), use `apiLift.info(options)` instead:
 
@@ -126,6 +127,11 @@ var info = apiLift.info({
 
 info.maxVersion // a number
 ```
+
+## Generated Doc
+All public methods and properties are described in the [generated docs](http://clubedaentrega.github.io/api-lift)
+
+### Endpoint
 
 ## Versioning
 This module aims to make endpoint versioning very simple, pragmatic and source-control friendly. The system only cares about backwards-incompatible changes, that is, MAJOR changes (as defined by [semantic versioning](http://semver.org/)).

@@ -25,11 +25,13 @@
 		"node": ">=0.10"
 	},
 	"scripts": {
-		"test": "mocha test -b"
+		"test": "mocha test -b",
+		"docs": "jsdoc -d docs -c docs.json -R README.md"
 	},
 	"devDependencies": {
 		"mocha": "^2.2.5",
 		"request": "^2.57.0",
-		"should": "^6.0.3"
+		"should": "^6.0.3",
+		"jsdoc": "^3.3.0"
 	}
 }
