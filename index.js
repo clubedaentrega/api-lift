@@ -112,6 +112,7 @@ function prepareOptions(options) {
 	options = options || {}
 	options.folder = options.folder || './api'
 	options.profile = Boolean(options.profile)
+	options.plugins = options.plugins || []
 	options.dataScrub = options.dataScrub || [/session|password|serial|token/i]
 	options.validate = options.validate || {}
 

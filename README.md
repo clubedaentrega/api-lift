@@ -47,6 +47,8 @@ var api = apiLift({
 		// Called for each action (ie, file) that fails to be lifted
 		throw action.error
 	},
+	// Custom lift-it plugins to use
+	plugins: [],
 	
 	// Options for validate plugin of `lift-it`
 	validate: {
