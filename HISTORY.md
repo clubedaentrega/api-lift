@@ -1,3 +1,10 @@
+# 5.0.0
+* Added: support for custom plugins (option `plugins`)
+
+## Breaking changes
+* Changed: lift-it@3.0.0
+* Removed: `onerror` option
+
 # 4.1.0
 * Added: support for custom plugins
 

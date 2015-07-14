@@ -10,7 +10,6 @@
 	"quotmark": true,
 	"strict": true,
 	"undef": true,
-	"expr": true,
 	"newcap": true,
 	"immed": true,
 	"node": true,

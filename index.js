@@ -133,9 +133,6 @@ function prepareOptions(options) {
 
 	options.filters = options.filters || './filters'
 	options.minVersion = options.minVersion === undefined ? 1 : options.minVersion
-	options.onerror = options.onerror || function (action) {
-		throw action.error
-	}
 
 	return options
 }

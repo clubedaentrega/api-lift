@@ -13,17 +13,11 @@ var apiLift = require('../'),
 	api, server, baseUrl, options
 
 describe('api', function () {
-	it('should lift and call onerror', function () {
-		var ok = false
+	it('should lift', function () {
 		options = {
-			folder: 'test/api',
-			onerror: function (action) {
-				action.name.should.be.equal('user/fail')
-				ok = true
-			}
+			folder: 'test/api'
 		}
 		api = apiLift(options)
-		ok.should.be.true
 	})
 
 	it('should start a server', function (done) {
@@ -56,10 +50,10 @@ describe('api', function () {
 				failure: null
 			})
 
-			runInfo.should.be.an.Object
-			runInfo.req.should.be.an.Object
-			runInfo.requestId.should.be.a.String.with.length(24)
-			runInfo.beginTime.should.be.a.Number
+			runInfo.should.be.an.Object()
+			runInfo.req.should.be.an.Object()
+			runInfo.requestId.should.be.a.String().with.length(24)
+			runInfo.beginTime.should.be.a.Number()
 
 			body.should.be.eql({
 				name: 'Gui',
@@ -79,10 +73,10 @@ describe('api', function () {
 		api._onfailure = function (response, runInfo, body, endpoint, error) {
 			response.failure.code.should.be.equal(101)
 
-			runInfo.should.be.an.Object
-			runInfo.req.should.be.an.Object
-			runInfo.requestId.should.be.a.String.with.length(24)
-			runInfo.beginTime.should.be.a.Number
+			runInfo.should.be.an.Object()
+			runInfo.req.should.be.an.Object()
+			runInfo.requestId.should.be.a.String().with.length(24)
+			runInfo.beginTime.should.be.a.Number()
 
 			body.should.be.eql({
 				name: 'Gui',
@@ -156,7 +150,9 @@ function call(name, body, callback) {
 		method: 'POST',
 		json: body
 	}, function (err, _, res) {
-		should(err).be.null
-		callback && callback(res)
+		should(err).be.null()
+		if (callback) {
+			callback(res)
+		}
 	})
 }

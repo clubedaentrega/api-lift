@@ -43,10 +43,6 @@ var api = apiLift({
 	profile: false,
 	errorClass: apiLift.APIError, // <-- can't be changed
 	enableErrorCode: true, // <-- can't be changed
-	onerror: function (action) {
-		// Called for each action (ie, file) that fails to be lifted
-		throw action.error
-	},
 	// Custom lift-it plugins to use
 	plugins: [],
 	
