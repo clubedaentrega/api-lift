@@ -1,3 +1,6 @@
+# 5.0.1
+* Changed: updated dependencies
+
 # 5.0.0
 * Added: support for custom plugins (option `plugins`)
 

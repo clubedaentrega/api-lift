@@ -1,4 +1,7 @@
 # API Lift
+[![Build Status](https://travis-ci.org/clubedaentrega/api-lift.svg?branch=master)](https://travis-ci.org/clubedaentrega/api-lift)
+[![Inline docs](http://inch-ci.org/github/clubedaentrega/api-lift.svg?branch=master)](http://inch-ci.org/github/clubedaentrega/api-lift)
+[![Dependency Status](https://david-dm.org/clubedaentrega/api-lift.svg)](https://david-dm.org/clubedaentrega/api-lift)
 
 Create a ready-to-go express router for a REST API with filters, input validation, output checking, versioning, automatic routes and logging.
 

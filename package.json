@@ -1,6 +1,6 @@
 {
 	"name": "api-lift",
-	"version": "5.0.0",
+	"version": "5.0.1",
 	"author": "Sitegui <sitegui@sitegui.com.br>",
 	"description": "Create a ready-to-go express router for a REST API with filters, input validation, output checking, versioning, automatic routes and logging",
 	"main": "./index.js",
@@ -16,23 +16,23 @@
 		"routing"
 	],
 	"dependencies": {
-		"body-parser": "^1.13.2",
-		"express": "^4.13.1",
-		"lift-it": "^3.0.0"
+		"body-parser": "^1.14.1",
+		"express": "^4.13.3",
+		"lift-it": "^3.0.1"
 	},
 	"license": "MIT",
 	"engines": {
-		"node": ">=0.10"
+		"node": ">=0.12"
 	},
 	"scripts": {
 		"test": "mocha test -b",
-		"docs": "rm -rf docs2 && jsdoc -d docs2 -c docs.json -R README.md",
+		"docs": "rm -rf docs2 && jsdoc -d docs2 -c docs.json -R README.md -t jaguarjs-jsdoc",
 		"commit-docs": "npm run docs && git checkout gh-pages && rm -rf docs && mv docs2 docs && git add docs -A && git commit"
 	},
 	"devDependencies": {
-		"mocha": "^2.2.5",
-		"request": "^2.58.0",
-		"should": "^7.0.2",
-		"jsdoc": "^3.3.2"
+		"mocha": "^2.3.3",
+		"request": "^2.65.0",
+		"should": "^7.1.1",
+		"jsdoc": "^3.3.3"
 	}
 }
