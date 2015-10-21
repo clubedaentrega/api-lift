@@ -1,97 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: API</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Class: API</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Class: API</h1>
-
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+    
+    
+    <script>
+    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{}};
+    </script>
     
 
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html"></a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="API">
+            <span class="title">
+                <a href="API.html">API</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="API#endpointByUrl"><a href="API.html#endpointByUrl">endpointByUrl</a></li>
+            
+                <li data-name="API#endpoints"><a href="API.html#endpoints">endpoints</a></li>
+            
+                <li data-name="API#maxVersion"><a href="API.html#maxVersion">maxVersion</a></li>
+            
+                <li data-name="API#minVersion"><a href="API.html#minVersion">minVersion</a></li>
+            
+                <li data-name="API#router"><a href="API.html#router">router</a></li>
+            
+                <li data-name="API#versions"><a href="API.html#versions">versions</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="API#run"><a href="API.html#run">run</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="APIError">
+            <span class="title">
+                <a href="APIError.html">APIError</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="APIError#code"><a href="APIError.html#code">code</a></li>
+            
+                <li data-name="APIError#message"><a href="APIError.html#message">message</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="APIError.create"><a href="APIError.html#.create">create</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Endpoint">
+            <span class="title">
+                <a href="Endpoint.html">Endpoint</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="Endpoint#action"><a href="Endpoint.html#action">action</a></li>
+            
+                <li data-name="Endpoint#name"><a href="Endpoint.html#name">name</a></li>
+            
+                <li data-name="Endpoint#url"><a href="Endpoint.html#url">url</a></li>
+            
+                <li data-name="Endpoint#version"><a href="Endpoint.html#version">version</a></li>
+            
+                <li data-name="Endpoint#versionStr"><a href="Endpoint.html#versionStr">versionStr</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="API.html">Class: API</h1>
+        
 
 
 
 <section>
-
+    
 <header>
+    <h2>
+    API
+    </h2>
     
-        <h2>
-        API
-        </h2>
-        
-    
-</header>
+</header>  
 
 <article>
     <div class="container-overview">
     
+    
+    
         
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="API">
+            
+            new API<span class="signature">(lifted, dataScrub, onsuccess, onfailure)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            lib/API.js, line 21
+        </div>
+        
+    </div>
 
     
-
-    <h4 class="name" id="API"><span class="type-signature"></span>new API<span class="signature">(lifted, dataScrub, onsuccess<span class="signature-attributes">nullable</span>, onfailure<span class="signature-attributes">nullable</span>)</span><span class="type-signature"></span></h4>
-
+</dt>
+<dd>
     
-
-
-
-<div class="description">
-    <p>Represent a lifted API</p>
+    
+    <div class="description">
+        <p>Represent a lifted API</p>
 <p>Instances of this class are created internally for you.
 <em>You don't need to use this constructor directly.</em></p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
+    </div>
     
+
+    
+    
+    
+    
+    
+        
 
 <table class="params">
     <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
         <tr>
             
                 <td class="name"><code>lifted</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -100,29 +218,26 @@
 
             
             </td>
-
             
-                <td class="attributes">
+            
+            
+            <td class="description last">
                 
-
-                
-
+                    
+                    
+                        
+                    
                 
                 </td>
-            
-
-            
-
-            <td class="description last"></td>
         </tr>
-
-    
-
+	
+	
+	
         <tr>
             
                 <td class="name"><code>dataScrub</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -131,29 +246,26 @@
 
             
             </td>
-
             
-                <td class="attributes">
+            
+            
+            <td class="description last">
                 
-
-                
-
+                    
+                    
+                        
+                    
                 
                 </td>
-            
-
-            
-
-            <td class="description last"></td>
         </tr>
-
-    
-
+	
+	
+	
         <tr>
             
                 <td class="name"><code>onsuccess</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -162,31 +274,28 @@
 
             
             </td>
-
             
-                <td class="attributes">
+            
+            
+            <td class="description last">
                 
-
-                
-                    &lt;nullable><br>
-                
-
+                    
+                    
+                        <span class="nullable">nullable</span>
+                    
+                        
+                    
                 
                 </td>
-            
-
-            
-
-            <td class="description last"></td>
         </tr>
-
-    
-
+	
+	
+	
         <tr>
             
                 <td class="name"><code>onfailure</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -195,582 +304,400 @@
 
             
             </td>
-
             
-                <td class="attributes">
+            
+            
+            <td class="description last">
                 
-
-                
-                    &lt;nullable><br>
-                
-
+                    
+                    
+                        <span class="nullable">nullable</span>
+                    
+                        
+                    
                 
                 </td>
-            
-
-            
-
-            <td class="description last"></td>
         </tr>
-
-    
-    </tbody>
+	
+	
+	</tbody>
 </table>
-
-
-
-
-
-
+    
+    
+    
 <dl class="details">
-
+    
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_API.js.html">lib/API.js</a>, <a href="lib_API.js.html#line21">line 21</a>
-    </li></ul></dd>
     
-
     
-
-    
-
     
 </dl>
 
+    
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
     
     </div>
-
     
-
     
-
     
-
-     
-
     
-
+    
+    
+    
+    
+    
+    
+    
     
         <h3 class="subsection-title">Members</h3>
-
         
+        <dl>
             
-<h4 class="name" id="endpointByUrl"><span class="type-signature"></span>endpointByUrl<span class="type-signature"> :Object.&lt;<a href="Endpoint.html">Endpoint</a>></span></h4>
-
-
-
-
-<div class="description">
-    <p>The map from url to an Endpoint instance</p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Object.&lt;<a href="Endpoint.html">Endpoint</a>></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="endpointByUrl">endpointByUrl<span class="type-signature type object.<endpoint>">Object.&lt;<a href="Endpoint.html">Endpoint</a>></span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The map from url to an Endpoint instance</p>
+    </div>
+    
+    
+    
 <dl class="details">
-
+    
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_API.js.html">lib/API.js</a>, <a href="lib_API.js.html#line45">line 45</a>
-    </li></ul></dd>
     
-
     
-
-    
-
     
 </dl>
 
-
-
-
-
+    
+    
+</dd>
 
         
             
-<h4 class="name" id="endpoints"><span class="type-signature"></span>endpoints<span class="type-signature"> :Array.&lt;<a href="Endpoint.html">Endpoint</a>></span></h4>
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Array.&lt;<a href="Endpoint.html">Endpoint</a>></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="endpoints">endpoints<span class="type-signature type array.<endpoint>">Array.&lt;<a href="Endpoint.html">Endpoint</a>></span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
 <dl class="details">
-
+    
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_API.js.html">lib/API.js</a>, <a href="lib_API.js.html#line39">line 39</a>
-    </li></ul></dd>
     
-
     
-
-    
-
     
 </dl>
 
-
-
-
-
+    
+    
+</dd>
 
         
             
-<h4 class="name" id="maxVersion"><span class="type-signature"></span>maxVersion<span class="type-signature"> :number</span></h4>
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">number</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="maxVersion">maxVersion<span class="type-signature type number">number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
 <dl class="details">
-
+    
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_API.js.html">lib/API.js</a>, <a href="lib_API.js.html#line29">line 29</a>
-    </li></ul></dd>
     
-
     
-
-    
-
     
 </dl>
 
-
-
-
-
+    
+    
+</dd>
 
         
             
-<h4 class="name" id="minVersion"><span class="type-signature"></span>minVersion<span class="type-signature"> :number</span></h4>
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">number</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="minVersion">minVersion<span class="type-signature type number">number</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
 <dl class="details">
-
+    
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_API.js.html">lib/API.js</a>, <a href="lib_API.js.html#line26">line 26</a>
-    </li></ul></dd>
     
-
     
-
-    
-
     
 </dl>
 
-
-
-
-
+    
+    
+</dd>
 
         
             
-<h4 class="name" id="router"><span class="type-signature"></span>router<span class="type-signature"> :external:express.Router</span></h4>
-
-
-
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">external:express.Router</span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="router">router<span class="type-signature type external:express.router">external:express.Router</span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    
+    
 <dl class="details">
-
+    
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_API.js.html">lib/API.js</a>, <a href="lib_API.js.html#line23">line 23</a>
-    </li></ul></dd>
     
-
     
-
-    
-
     
 </dl>
 
-
-
-
-
+    
+    
+</dd>
 
         
             
-<h4 class="name" id="versions"><span class="type-signature"></span>versions<span class="type-signature"> :Array.&lt;string></span></h4>
-
-
-
-
-<div class="description">
-    <p>The list of supported versions, ordered from oldest to newest.
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="versions">versions<span class="type-signature type array.<string>">Array.&lt;string></span> </h4>
+    </div>
+    
+    
+</dt>
+<dd>
+    
+    <div class="description">
+        <p>The list of supported versions, ordered from oldest to newest.
 Example: <code>['v3', 'v4']</code></p>
-</div>
-
-
-
-    <h5>Type:</h5>
-    <ul>
-        <li>
-            
-<span class="param-type">Array.&lt;string></span>
-
-
-        </li>
-    </ul>
-
-
-
-
-
+    </div>
+    
+    
+    
 <dl class="details">
-
+    
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_API.js.html">lib/API.js</a>, <a href="lib_API.js.html#line36">line 36</a>
-    </li></ul></dd>
     
-
     
-
-    
-
     
 </dl>
 
-
-
-
-
-
-        
     
+    
+</dd>
 
+        </dl>
+    
+    
     
         <h3 class="subsection-title">Methods</h3>
-
         
+        <dl>
             
+<dt>
+    <div class="nameContainer">
+        <h4 class="name" id="run">
+            
+            run<span class="signature">(url, body, <span class="optional">runInfo</span>, callback)</span>
+        </h4>
+    
+        
+        <div class="tag-source">
+            lib/API.js, line 83
+        </div>
+        
+    </div>
 
     
-
-    <h4 class="name" id="run"><span class="type-signature"></span>run<span class="signature">(url, body, runInfo<span class="signature-attributes">opt</span>, callback)</span><span class="type-signature"></span></h4>
-
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Execute an endpoint in this api</p>
+    </div>
     
 
-
-
-<div class="description">
-    <p>Execute an endpoint in this api</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
     
+    
+    
+    
+    
+        
 
 <table class="params">
     <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
         <tr>
             
                 <td class="name"><code>url</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -779,33 +706,30 @@ Example: <code>['v3', 'v4']</code></p>
 
             
             </td>
-
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
             
                 <td class="default">
                 
                 </td>
             
-
-            <td class="description last"><p>like '/v1/user/create' or '/v-last/user/create'</p></td>
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>like '/v1/user/create' or '/v-last/user/create'</p></td>
         </tr>
-
-    
-
+	
+	
+	
         <tr>
             
                 <td class="name"><code>body</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -814,33 +738,30 @@ Example: <code>['v3', 'v4']</code></p>
 
             
             </td>
-
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
             
                 <td class="default">
                 
                 </td>
             
-
-            <td class="description last"></td>
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                </td>
         </tr>
-
-    
-
+	
+	
+	
         <tr>
             
                 <td class="name"><code>runInfo</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -849,19 +770,7 @@ Example: <code>['v3', 'v4']</code></p>
 
             
             </td>
-
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
             
                 <td class="default">
                 
@@ -869,40 +778,44 @@ Example: <code>['v3', 'v4']</code></p>
                 
                 </td>
             
-
-            <td class="description last"><p>data available as <code>process.domain.runInfo</code>. See more info in <a href="https://www.npmjs.com/package/run-it">run-it</a> module</p>
-                <h6>Properties</h6>
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                <p>data available as <code>process.domain.runInfo</code>. See more info in <a target="_blank" href="https://www.npmjs.com/package/run-it">run-it</a> module</p>
                 
 
 <table class="params">
     <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		<th>Default</th>
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
         <tr>
             
                 <td class="name"><code>beginTime</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -911,19 +824,7 @@ Example: <code>['v3', 'v4']</code></p>
 
             
             </td>
-
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
             
                 <td class="default">
                 
@@ -931,17 +832,26 @@ Example: <code>['v3', 'v4']</code></p>
                 
                 </td>
             
-
-            <td class="description last"></td>
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
         </tr>
-
-    
-
+	
+	
+	
         <tr>
             
                 <td class="name"><code>requestId</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -950,19 +860,7 @@ Example: <code>['v3', 'v4']</code></p>
 
             
             </td>
-
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
             
                 <td class="default">
                 
@@ -970,24 +868,32 @@ Example: <code>['v3', 'v4']</code></p>
                 
                 </td>
             
-
-            <td class="description last"></td>
+            
+            <td class="description last">
+                
+                    
+                        <span class="optional">optional</span>
+                    
+                    
+                        
+                    
+                
+                </td>
         </tr>
-
-    
-    </tbody>
+	
+	
+	</tbody>
 </table>
-
             </td>
         </tr>
-
-    
-
+	
+	
+	
         <tr>
             
                 <td class="name"><code>callback</code></td>
             
-
+            
             <td class="type">
             
                 
@@ -996,116 +902,90 @@ Example: <code>['v3', 'v4']</code></p>
 
             
             </td>
-
             
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
             
                 <td class="default">
                 
                 </td>
             
-
-            <td class="description last"><p>async cb(out)</p></td>
+            
+            <td class="description last">
+                
+                    
+                    
+                        
+                    
+                
+                <p>async cb(out)</p></td>
         </tr>
-
-    
-    </tbody>
+	
+	
+	</tbody>
 </table>
-
-
-
-
-
-
+    
+    
+    
 <dl class="details">
-
+    
+        
+    
+    
     
 
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_API.js.html">lib/API.js</a>, <a href="lib_API.js.html#line83">line 83</a>
-    </li></ul></dd>
     
-
     
-
-    
-
     
 </dl>
 
+    
+    
 
+    
 
+    
+    
+    
+    
+    
+    
+    
+</dd>
 
+        </dl>
+    
+    
+    
+    
+    
+</article>
 
-
-
-
-
-
-
+</section>  
 
 
 
 
 
         
-    
 
-    
-
-    
-</article>
-
-</section>
-
-
-
-
+        <footer>
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.3</a> on Wed Oct 21 2015 00:59:33 GMT-0200 (Horário brasileiro de verão)
+        </footer>
+    </div>
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-api-lift.html">api-lift</a></li></ul><h3>Externals</h3><ul><li><a href="external-express.html">express</a></li><li><a href="external-lift-it.html">lift-it</a></li></ul><h3>Classes</h3><ul><li><a href="API.html">API</a></li><li><a href="APIError.html">APIError</a></li><li><a href="Endpoint.html">Endpoint</a></li></ul><h3><a href="global.html">Global</a></h3>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0</a> on Sun Jun 07 2015 14:54:34 GMT-0300 (Hora oficial do Brasil)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
 </body>
 </html>

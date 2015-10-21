@@ -1,26 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Index</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <script src="scripts/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
-</head>
-
-<body>
-
-<div id="main">
-
-    <h1 class="page-title">Home</h1>
-
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
+    
+    
+    <script>
+    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{}};
+    </script>
     
 
+    
+</head>
+<body>
+<div id="wrap" class="clearfix">
+    
+<div class="navigation">
+    <h3 class="applicationName"><a href="index.html"></a></h3>
+
+    <div class="search">
+        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
+    </div>
+    <ul class="list">
+    
+        <li class="item" data-name="API">
+            <span class="title">
+                <a href="API.html">API</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="API#endpointByUrl"><a href="API.html#endpointByUrl">endpointByUrl</a></li>
+            
+                <li data-name="API#endpoints"><a href="API.html#endpoints">endpoints</a></li>
+            
+                <li data-name="API#maxVersion"><a href="API.html#maxVersion">maxVersion</a></li>
+            
+                <li data-name="API#minVersion"><a href="API.html#minVersion">minVersion</a></li>
+            
+                <li data-name="API#router"><a href="API.html#router">router</a></li>
+            
+                <li data-name="API#versions"><a href="API.html#versions">versions</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="API#run"><a href="API.html#run">run</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="APIError">
+            <span class="title">
+                <a href="APIError.html">APIError</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="APIError#code"><a href="APIError.html#code">code</a></li>
+            
+                <li data-name="APIError#message"><a href="APIError.html#message">message</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            <span class="subtitle">Methods</span>
+            
+                <li data-name="APIError.create"><a href="APIError.html#.create">create</a></li>
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+        <li class="item" data-name="Endpoint">
+            <span class="title">
+                <a href="Endpoint.html">Endpoint</a>
+                
+            </span>
+            <ul class="members itemMembers">
+            
+            <span class="subtitle">Members</span>
+            
+                <li data-name="Endpoint#action"><a href="Endpoint.html#action">action</a></li>
+            
+                <li data-name="Endpoint#name"><a href="Endpoint.html#name">name</a></li>
+            
+                <li data-name="Endpoint#url"><a href="Endpoint.html#url">url</a></li>
+            
+                <li data-name="Endpoint#version"><a href="Endpoint.html#version">version</a></li>
+            
+                <li data-name="Endpoint#versionStr"><a href="Endpoint.html#versionStr">versionStr</a></li>
+            
+            </ul>
+            <ul class="typedefs itemMembers">
+            
+            </ul>
+            <ul class="methods itemMembers">
+            
+            </ul>
+            <ul class="events itemMembers">
+            
+            </ul>
+        </li>
+    
+    </ul>
+</div>
+    <div class="main">
+        <h1 class="page-title" data-filename="index.html">Index</h1>
+        
 
 
     
@@ -35,23 +150,24 @@
 
 
 
-
-
     
 
 
 
 
     <section>
-        <article><h1>API Lift</h1><p>Create a ready-to-go express router for a REST API with filters, input validation, output checking, versioning, automatic routes and logging.</p>
-<p>See on <a href="https://www.npmjs.com/package/api-lift">npm</a></p>
+        <article class="readme"><h1>API Lift</h1><p><a target="_blank" href="https://travis-ci.org/clubedaentrega/api-lift"><img src="https://travis-ci.org/clubedaentrega/api-lift.svg?branch=master" alt="Build Status"></a>
+<a target="_blank" href="http://inch-ci.org/github/clubedaentrega/api-lift"><img src="http://inch-ci.org/github/clubedaentrega/api-lift.svg?branch=master" alt="Inline docs"></a>
+<a target="_blank" href="https://david-dm.org/clubedaentrega/api-lift"><img src="https://david-dm.org/clubedaentrega/api-lift.svg" alt="Dependency Status"></a></p>
+<p>Create a ready-to-go express router for a REST API with filters, input validation, output checking, versioning, automatic routes and logging.</p>
+<p>See on <a target="_blank" href="https://www.npmjs.com/package/api-lift">npm</a></p>
 <h2>Install</h2><p><code>npm install api-lift --save</code></p>
-<h2>Important note</h2><p>This module is built on top of <a href="https://www.npmjs.com/package/express">express</a> and <a href="https://www.npmjs.com/package/lift-it">lift-it</a> and <em>is</em> meant to be very opinionated.</p>
+<h2>Important note</h2><p>This module is built on top of <a target="_blank" href="https://www.npmjs.com/package/express">express</a> and <a target="_blank" href="https://www.npmjs.com/package/lift-it">lift-it</a> and <em>is</em> meant to be very opinionated.</p>
 <h2>Status</h2><p>Stable, missing some docs</p>
 <h2>Assumptions</h2><p>This module is locked down by some strong assumptions:</p>
 <ul>
 <li>The routes are created and named after the files in the file system</li>
-<li>The endpoints are to be implemented as supported by <a href="https://www.npmjs.com/package/lift-it">lift-it</a>. See details in section &quot;Endpoint handler&quot;</li>
+<li>The endpoints are to be implemented as supported by <a target="_blank" href="https://www.npmjs.com/package/lift-it">lift-it</a>. See details in section &quot;Endpoint handler&quot;</li>
 <li>All routes only answer POST requests. All input and output is JSON</li>
 <li>Standard output for success: <code>{failure:null}</code>, for error: <code>{failure:{code:Number,message:String}}</code></li>
 </ul>
@@ -59,7 +175,7 @@
 <ul>
 <li>Filters, input validation, output checking and profiling (by <code>lift-it</code>)</li>
 <li>Versioning: don't break old consumers and yet let the API evolve</li>
-<li>Logging: simple logging interface to connect to any logging solution (like <a href="https://www.npmjs.com/package/log-sink">log-sink</a>)</li>
+<li>Logging: simple logging interface to connect to any logging solution (like <a target="_blank" href="https://www.npmjs.com/package/log-sink">log-sink</a>)</li>
 </ul>
 <h2>Options</h2><pre class="prettyprint source lang-js"><code>var apiLift = require('api-lift')
 
@@ -74,10 +190,8 @@ var api = apiLift({
     profile: false,
     errorClass: apiLift.APIError, // &lt;-- can't be changed
     enableErrorCode: true, // &lt;-- can't be changed
-    onerror: function (action) {
-        // Called for each action (ie, file) that fails to be lifted
-        throw action.error
-    },
+    // Custom lift-it plugins to use
+    plugins: [],
 
     // Options for validate plugin of `lift-it`
     validate: {
@@ -150,8 +264,8 @@ var info = apiLift.info({
     minVersion: 1
 })
 
-info.maxVersion // a number</code></pre><h2>Generated Doc</h2><p>All public methods and properties are described in the <a href="http://clubedaentrega.github.io/api-lift/docs">generated docs</a></p>
-<h2>Versioning</h2><p>This module aims to make endpoint versioning very simple, pragmatic and source-control friendly. The system only cares about backwards-incompatible changes, that is, MAJOR changes (as defined by <a href="http://semver.org/">semantic versioning</a>).</p>
+info.maxVersion // a number</code></pre><h2>Generated Doc</h2><p>All public methods and properties are described in the <a target="_blank" href="http://clubedaentrega.github.io/api-lift/docs">generated docs</a></p>
+<h2>Versioning</h2><p>This module aims to make endpoint versioning very simple, pragmatic and source-control friendly. The system only cares about backwards-incompatible changes, that is, MAJOR changes (as defined by <a target="_blank" href="http://semver.org/">semantic versioning</a>).</p>
 <p>By default (<code>options.minVersion</code>), all endpoints start at version 1. That is, a file in the path <code>api/user/create.js</code> is served at the url <code>/v1/user/create</code>. If a breaking change is to be made in this endpoint, the API version must be bumped to 2. To do this, the current file is copied to <code>api/user/create-v1.js</code> and new changes can be freely applied to the current <code>api/user/create.js</code> file. The new url will be <code>/v2/user/create</code> and will be mapped to the current file. The old url will keep working and will point to the old v1 file. Any other endpoint that hasn't been changed will be served equally in v1 and v2. Magic!</p>
 <p>Note that the v1 file is like a snapshot. From the point of view of a revision control system (like git), the file has evolved linearly: no move/rename or any other trick (like symlinks).</p>
 <p>After some time, the support for version 1 may be dropped, by increasing the <code>minVersion</code> option and removing old v1 files.</p>
@@ -183,19 +297,15 @@ info.maxVersion // a number</code></pre><h2>Generated Doc</h2><p>All public meth
 
 
 
+        
+
+        <footer>
+            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.3</a> on Wed Oct 21 2015 00:59:33 GMT-0200 (Horário brasileiro de verão)
+        </footer>
+    </div>
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-api-lift.html">api-lift</a></li></ul><h3>Externals</h3><ul><li><a href="external-express.html">express</a></li><li><a href="external-lift-it.html">lift-it</a></li></ul><h3>Classes</h3><ul><li><a href="API.html">API</a></li><li><a href="APIError.html">APIError</a></li><li><a href="Endpoint.html">Endpoint</a></li></ul><h3><a href="global.html">Global</a></h3>
-</nav>
-
-<br class="clear">
-
-<footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0</a> on Sun Jun 07 2015 14:54:34 GMT-0300 (Hora oficial do Brasil)
-</footer>
-
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+<script src="scripts/main.js"></script>
 </body>
 </html>
