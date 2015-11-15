@@ -77,6 +77,7 @@ var api = apiLift({
 	// Options for this module
 	minVersion: 1, // the min version to support
 	dataScrub: [/session|password|serial|token/i], // describe fields to hide in the body
+	callToJSON: x => x.toJSON(), // function to convert log value to JSON
 	onsuccess: function (response, runInfo, body, endpoint) {
 		// Called right before a request is answered with success
 		// `response` is the JSON object to send

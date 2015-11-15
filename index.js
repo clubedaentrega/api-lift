@@ -35,7 +35,7 @@ module.exports = function (options) {
 	// Lift and call error callbacks
 	var lifted = lift(options)
 
-	var api = new API(lifted, options.dataScrub, options.onsuccess, options.onfailure)
+	var api = new API(lifted, options.dataScrub, options.callToJSON, options.onsuccess, options.onfailure)
 
 	// Prepare express middlewares
 	api.router.use(function (req, res, next) {
@@ -72,7 +72,7 @@ module.exports = function (options) {
 
 	// Error handler
 	api.router.use(function (err, req, res, next) {
-		next // next isn't used on purpose, because express demands a 4-arity function
+		next = next // next isn't used on purpose, because express demands a 4-arity function
 		if (err instanceof Error && err.status === 400 && typeof err.body === 'string') {
 			// JSON parsing error
 			err = APIError.create(101, 'Invalid JSON: ' + err)
@@ -114,6 +114,9 @@ function prepareOptions(options) {
 	options.profile = Boolean(options.profile)
 	options.plugins = options.plugins || []
 	options.dataScrub = options.dataScrub || [/session|password|serial|token/i]
+	options.callToJSON = options.callToJSON || function (x) {
+		return x.toJSON()
+	}
 	options.validate = options.validate || {}
 
 	// Set validateOutput defaults
