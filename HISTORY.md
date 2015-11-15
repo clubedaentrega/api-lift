@@ -1,3 +1,7 @@
+# 5.1.0
+* Changed: updated lift-it@3.1.0
+* Added: option `callToJSON` to let one change how the body scrubbing logic call toJSON on objects. The default implementation is simply `x => x.toJSON()`.
+
 # 5.0.1
 * Changed: updated dependencies
 
