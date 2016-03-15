@@ -74,6 +74,9 @@ var api = apiLift({
 	// Options for filters plugin of `lift-it`
 	filters: './filters',
 	
+	// Options for bodyParser.json() of `body-parser`
+	bodyParser: {},
+	
 	// Options for this module
 	minVersion: 1, // the min version to support
 	dataScrub: [/session|password|serial|token/i], // describe fields to hide in the body

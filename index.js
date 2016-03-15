@@ -53,7 +53,7 @@ module.exports = function (options) {
 
 		next()
 	})
-	api.router.use(bodyParser.json())
+	api.router.use(bodyParser.json(options.bodyParser))
 
 	// Create the endpoints using versioning
 	api._prepareEndpoints(options.minVersion)
@@ -135,6 +135,7 @@ function prepareOptions(options) {
 	vO.options.strict = vO.options.strict === undefined ? true : vO.options.strict
 
 	options.filters = options.filters || './filters'
+	options.bodyParser = options.bodyParser || {}
 	options.minVersion = options.minVersion === undefined ? 1 : options.minVersion
 
 	return options
