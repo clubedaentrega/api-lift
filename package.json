@@ -1,6 +1,6 @@
 {
 	"name": "api-lift",
-	"version": "5.1.0",
+	"version": "5.2.0",
 	"author": "Sitegui <sitegui@sitegui.com.br>",
 	"description": "Create a ready-to-go express router for a REST API with filters, input validation, output checking, versioning, automatic routes and logging",
 	"main": "./index.js",

@@ -1,3 +1,6 @@
+# 5.2.0
+* Added: option `bodyParser` passed to bodyParser.json()
+
 # 5.1.0
 * Changed: updated lift-it@3.1.0
 * Added: option `callToJSON` to let one change how the body scrubbing logic call toJSON on objects. The default implementation is simply `x => x.toJSON()`.
