@@ -16,8 +16,8 @@
 		"routing"
 	],
 	"dependencies": {
-		"body-parser": "^1.14.1",
-		"express": "^4.13.3",
+		"body-parser": "^1.15.0",
+		"express": "^4.13.4",
 		"lift-it": "^3.1.0"
 	},
 	"license": "MIT",
@@ -30,9 +30,9 @@
 		"commit-docs": "npm run docs && git checkout gh-pages && rm -rf docs && mv docs2 docs && git add docs -A && git commit"
 	},
 	"devDependencies": {
-		"mocha": "^2.3.3",
-		"request": "^2.65.0",
-		"should": "^7.1.1",
-		"jsdoc": "^3.3.3"
+		"mocha": "^2.4.5",
+		"request": "^2.69.0",
+		"should": "^8.2.2",
+		"jsdoc": "^3.4.0"
 	}
 }
