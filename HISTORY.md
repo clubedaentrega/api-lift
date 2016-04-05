@@ -1,3 +1,6 @@
+# 5.3.0
+* Changed: updated lift-it@4.0.0
+
 # 5.2.0
 * Added: option `bodyParser` passed to bodyParser.json()
 
