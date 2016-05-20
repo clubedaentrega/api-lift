@@ -16,9 +16,9 @@
 		"routing"
 	],
 	"dependencies": {
-		"body-parser": "^1.15.0",
+		"body-parser": "^1.15.1",
 		"express": "^4.13.4",
-		"lift-it": "^4.0.0"
+		"lift-it": "^4.0.1"
 	},
 	"license": "MIT",
 	"engines": {
@@ -31,8 +31,8 @@
 	},
 	"devDependencies": {
 		"mocha": "^2.4.5",
-		"request": "^2.70.0",
-		"should": "^8.3.0",
+		"request": "^2.72.0",
+		"should": "^8.3.2",
 		"jsdoc": "^3.4.0"
 	}
 }
