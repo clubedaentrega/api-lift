@@ -80,7 +80,10 @@ var api = apiLift({
 	// Options for this module
 	minVersion: 1, // the min version to support
 	dataScrub: [/session|password|serial|token/i], // describe fields to hide in the body
-	callToJSON: x => x.toJSON(), // function to convert log value to JSON
+	callToJSON: function (x) {
+		// function to convert log value to JSON
+		return x.toJSON()
+	},
 	onsuccess: function (response, runInfo, body, endpoint) {
 		// Called right before a request is answered with success
 		// `response` is the JSON object to send
@@ -97,6 +100,37 @@ var api = apiLift({
 		// `response`, `runInfo`, `body` and `endpoint` behave the same as onsuccess
 		// `endpoint` may be undefined if the error is not linked to any
 		// `error` is the original error object
+	},
+	
+	// Options for generating openApi spec
+	// See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
+	openApi: {
+		// Whether to add routes to serve the spec, like:
+		// /swagger.json -> all versions
+		// /v3/swagger.json -> specific version
+		// /v-last/swagger.json -> last version
+		serve: false,
+		// File name used to serve
+		serveAs: 'swagger.json',
+		middleware: function (req, res, next) {
+			// An express middleware, set on the spec-serving rout
+			// May be used to implement authentication, for example
+			next()
+		},
+		prepareEndpoint: function (endpoint, pathItem) {
+			// Called for each "Path Item Object" created
+			// `endpoint` is the instance of Endpoint
+			// `pathItem` is an object following the OpenAPI spec for "Path Item Object"
+			// The pathItem to use should be returned
+			// If nothing is returned, this endpoint will be omitted from the output
+			return pathItem
+		},
+		prepareSpec: function (spec) {
+			// Called for each "Path Item Object" created
+			// `endpoint` is the instance of Endpoint
+			// `pathItem` is an object following the OpenAPI spec for "Path Item Object"
+			return spec
+		}
 	}
 })
 

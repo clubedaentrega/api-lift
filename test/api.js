@@ -15,7 +15,10 @@ var apiLift = require('../'),
 describe('api', function () {
 	it('should lift', function () {
 		options = {
-			folder: 'test/api'
+			folder: 'test/api',
+			openApi: {
+				serve: true
+			}
 		}
 		api = apiLift(options)
 	})
@@ -134,6 +137,106 @@ describe('api', function () {
 					message: 'I was expecting at least 6 chars in password'
 				}
 			})
+			done()
+		})
+	})
+
+	it('should create the open api spec', function () {
+		var v1PathItem = {
+				post: {
+					parameters: [{
+						name: 'json',
+						in : 'body',
+						required: true,
+						schema: {
+							type: 'object',
+							properties: {
+								name: {
+									type: 'string'
+								},
+								password: {
+									type: 'string'
+								}
+							},
+							required: ['name', 'password']
+						}
+					}],
+					responses: {
+						200: {
+							description: 'Success or error',
+							schema: {
+								type: 'object',
+								properties: {}
+							}
+						}
+					}
+				}
+			},
+			v2PathItem = {
+				post: {
+					parameters: [{
+						name: 'json',
+						in : 'body',
+						required: true,
+						schema: {
+							type: 'object',
+							properties: {
+								name: {
+									type: 'string'
+								},
+								password: {
+									type: 'string',
+									minLength: 6
+								}
+							},
+							required: ['name', 'password']
+						}
+					}],
+					responses: {
+						200: {
+							description: 'Success or error'
+						}
+					}
+				}
+			}
+
+		api.getOpenAPISpec().should.be.eql({
+			swagger: '2.0',
+			info: {
+				title: 'API',
+				version: 'v2.1'
+			},
+			consumes: ['application/json'],
+			produces: ['application/json'],
+			paths: {
+				'/v1/user/create': v1PathItem,
+				'/v2/user/create': v2PathItem
+			},
+			definitions: {}
+		})
+
+		api.getOpenAPISpec(2).should.be.eql({
+			swagger: '2.0',
+			info: {
+				title: 'API',
+				version: 'v2'
+			},
+			consumes: ['application/json'],
+			produces: ['application/json'],
+			paths: {
+				'/v2/user/create': v2PathItem
+			},
+			definitions: {}
+		})
+	})
+
+	it('should serve the open api spec', function (done) {
+		request({
+			url: baseUrl + 'v-last/swagger.json'
+		}, function (err, _, res) {
+			should(err).be.null()
+			var spec = JSON.parse(res)
+			spec.info.version.should.be.equal('v2')
 			done()
 		})
 	})

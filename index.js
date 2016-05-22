@@ -35,7 +35,7 @@ module.exports = function (options) {
 	// Lift and call error callbacks
 	var lifted = lift(options)
 
-	var api = new API(lifted, options.dataScrub, options.callToJSON, options.onsuccess, options.onfailure)
+	var api = new API(lifted, options)
 
 	// Prepare express middlewares
 	api.router.use(function (req, res, next) {
@@ -70,6 +70,17 @@ module.exports = function (options) {
 		})
 	})
 
+	// Prepare open API routes
+	if (options.openApi.serve) {
+		api.router.get('/' + options.openApi.serveAs, getOpenApiMiddlewares())
+		api.router.get('/v-last/' + options.openApi.serveAs, getOpenApiMiddlewares(api.maxVersion))
+
+		var version
+		for (version = api.minVersion; version <= api.maxVersion; version++) {
+			api.router.get('/v' + version + '/' + options.openApi.serveAs, getOpenApiMiddlewares(version))
+		}
+	}
+
 	// Error handler
 	api.router.use(function (err, req, res, next) {
 		next = next // next isn't used on purpose, because express demands a 4-arity function
@@ -81,6 +92,16 @@ module.exports = function (options) {
 			res.json(out)
 		})
 	})
+
+	function getOpenApiMiddlewares(version) {
+		return [options.openApi.middleware, function (req, res) {
+			var spec = api.getOpenAPISpec(version)
+			if (!spec.basePath) {
+				spec.basePath = req.baseUrl || '/'
+			}
+			res.json(spec)
+		}]
+	}
 
 	return api
 }
@@ -137,6 +158,19 @@ function prepareOptions(options) {
 	options.filters = options.filters || './filters'
 	options.bodyParser = options.bodyParser || {}
 	options.minVersion = options.minVersion === undefined ? 1 : options.minVersion
+
+	options.openApi = options.openApi || {}
+	options.openApi.serve = Boolean(options.openApi.serve)
+	options.openApi.serveAs = options.openApi.serveAs || 'swagger.json'
+	options.openApi.middleware = options.openApi.middleware || function (req, res, next) {
+		next()
+	}
+	options.openApi.prepareEndpoint = options.openApi.prepareEndpoint || function (endpoint, pathItem) {
+		return pathItem
+	}
+	options.openApi.prepareSpec = options.openApi.prepareSpec || function (spec) {
+		return spec
+	}
 
 	return options
 }

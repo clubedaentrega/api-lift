@@ -1,3 +1,7 @@
+# 5.4.0
+* Added: support for [OpenAPI](https://openapis.org/) (Swagger) spec, with `API#getOpenAPISpec()`
+* Added: optional (disabled by default) route to serve swagger.json file for each version and for all versions
+
 # 5.3.0
 * Changed: updated lift-it@4.0.0
 
