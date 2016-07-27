@@ -129,6 +129,14 @@ describe('api', function () {
 		})
 	})
 
+	it('should warn about request body to large', function (done) {
+		call('v2/user/update', body, function (res) {
+			res.failure.code.should.be.equal(100)
+			res.failure.message.should.be.equal('request entity too large')
+			done()
+		})
+	})
+
 	it('should expose the run() method to call endpoints', function (done) {
 		api.run('/v2/user/create', body, function (out) {
 			out.should.be.eql({
@@ -198,7 +206,8 @@ describe('api', function () {
 						}
 					}
 				}
-			}
+			},
+			updatePathItem = v2PathItem
 
 		api.getOpenAPISpec().should.be.eql({
 			swagger: '2.0',
@@ -210,7 +219,9 @@ describe('api', function () {
 			produces: ['application/json'],
 			paths: {
 				'/v1/user/create': v1PathItem,
-				'/v2/user/create': v2PathItem
+				'/v2/user/create': v2PathItem,
+				'/v1/user/update': updatePathItem,
+				'/v2/user/update': updatePathItem
 			},
 			definitions: {}
 		})
@@ -224,7 +235,8 @@ describe('api', function () {
 			consumes: ['application/json'],
 			produces: ['application/json'],
 			paths: {
-				'/v2/user/create': v2PathItem
+				'/v2/user/create': v2PathItem,
+				'/v2/user/update': updatePathItem
 			},
 			definitions: {}
 		})
