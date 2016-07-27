@@ -64,7 +64,7 @@ module.exports = function (options) {
 		}
 
 		api._runRequest(req, res, function (err, out) {
-			if (err) {
+			if (err || !out) {
 				return next(err)
 			}
 			res.json(out)
