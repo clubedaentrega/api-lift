@@ -80,7 +80,7 @@ var api = apiLift({
 	// Options for this module
 	minVersion: 1, // the min version to support
 	dataScrub: [/session|password|serial|token/i], // describe fields to hide in the body
-	callToJSON: function (x) {
+	callToJSON: function (x) {module  
 		// function to convert log value to JSON
 		return x.toJSON()
 	},
@@ -216,6 +216,9 @@ TODO
 
 ## Endpoint handler
 TODO
+
+### Body Limit
+Each endpoint can set it's own body size limit by setting the `module.bodyLimit` property (syntax from [bytes](https://www.npmjs.com/package/bytes)), if it doesn't set this property the limit will be the one defined in the `bodyParser` field from `options`. 
 
 ## Error codes
 TODO
