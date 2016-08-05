@@ -4,7 +4,6 @@ var express = require('express'),
 	APIError = require('./lib/APIError'),
 	lift = require('./lib/lift'),
 	versions = require('./lib/versions'),
-	bodyParser = require('body-parser'),
 	genId = require('./lib/genId'),
 	API = require('./lib/API')
 
@@ -53,19 +52,21 @@ module.exports = function (options) {
 
 		next()
 	})
-	api.router.use(bodyParser.json(options.bodyParser))
 
 	// Create the endpoints using versioning
 	api._prepareEndpoints(options.minVersion)
 
 	// Prepare express endpoint handler
 	api.router.use(function (req, res, next) {
-		if (req.method !== 'POST' || !req.body) {
+		if (req.method !== 'POST') {
 			// We're only looking into POST requests
 			return next()
 		}
 
-		api.run(req.url, req.body, req.runInfo, function (out) {
+		api._runRequest(req, res, function (err, out) {
+			if (err || !out) {
+				return next(err)
+			}
 			res.json(out)
 		})
 	})

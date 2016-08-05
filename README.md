@@ -217,5 +217,8 @@ TODO
 ## Endpoint handler
 TODO
 
+### Body Limit
+Each endpoint can set its own body size limit by setting the `module.exports.bodyLimit` property (syntax from [bytes](https://www.npmjs.com/package/bytes)). If it doesn't set this property, the limit will be the one defined in the `bodyParser` field from `options`.
+
 ## Error codes
 TODO
