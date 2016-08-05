@@ -1,3 +1,6 @@
+# 5.5.0
+* Added: support for setting body limit by endpoint using `module.exports.bodyLimit`
+
 # 5.4.0
 * Added: support for [OpenAPI](https://openapis.org/) (Swagger) spec, with `API#getOpenAPISpec()`
 * Added: optional (disabled by default) route to serve swagger.json file for each version and for all versions
