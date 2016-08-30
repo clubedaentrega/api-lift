@@ -139,6 +139,7 @@ function prepareOptions(options) {
 	options.callToJSON = options.callToJSON || function (x) {
 		return x.toJSON()
 	}
+	options.timeout = options.timeout || 30e3
 	options.validate = options.validate || {}
 
 	// Set validateOutput defaults

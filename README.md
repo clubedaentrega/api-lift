@@ -101,6 +101,14 @@ var api = apiLift({
 		// `endpoint` may be undefined if the error is not linked to any
 		// `error` is the original error object
 	},
+	timeout: 30e3,
+	ontimeout: function (runInfo, body, endpoint) {
+		// Called when an endpoint does not resolve within time
+		// `runInfo`, `body` and `endpoint` behave the same as onsuccess
+		// The timeout will not interfere on the endpoint's normal operation, that is,
+		// the request won't be modified in any way and the endpoint still have
+		// oportunity to answer the request properly
+	},
 	
 	// Options for generating openApi spec
 	// See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
