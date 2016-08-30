@@ -1,7 +1,8 @@
 /*globals describe, it*/
 'use strict'
 
-var versions = require('../lib/versions')
+var versions = require('../lib/versions'),
+	Endpoint = require('../lib/Endpoint')
 require('should')
 
 describe('versions', function () {
@@ -23,13 +24,7 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 1,
 			versions: ['v1'],
-			endpoints: [{
-				url: '/v1/user/create',
-				name: 'user/create',
-				versionStr: 'v1',
-				version: 1,
-				action: a
-			}]
+			endpoints: [new Endpoint('user/create', 1, a)]
 		})
 	})
 
@@ -45,56 +40,23 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 3,
 			versions: ['v1', 'v2', 'v3'],
-			endpoints: [{
-				url: '/v2/user/create',
-				name: 'user/create',
-				versionStr: 'v2',
-				version: 2,
-				action: a
-			}, {
-				url: '/v1/user/create',
-				name: 'user/create',
-				versionStr: 'v1',
-				version: 1,
-				action: a
-			}]
+			endpoints: [
+				new Endpoint('user/create', 2, a),
+				new Endpoint('user/create', 1, a)
+			]
 		})
 
 		check(1, [a, b], {
 			minVersion: 1,
 			maxVersion: 3,
 			versions: ['v1', 'v2', 'v3'],
-			endpoints: [{
-				url: '/v2/user/create',
-				name: 'user/create',
-				versionStr: 'v2',
-				version: 2,
-				action: a
-			}, {
-				url: '/v1/user/create',
-				name: 'user/create',
-				versionStr: 'v1',
-				version: 1,
-				action: a
-			}, {
-				url: '/v3/user/update',
-				name: 'user/update',
-				versionStr: 'v3',
-				version: 3,
-				action: b
-			}, {
-				url: '/v2/user/update',
-				name: 'user/update',
-				versionStr: 'v2',
-				version: 2,
-				action: b
-			}, {
-				url: '/v1/user/update',
-				name: 'user/update',
-				versionStr: 'v1',
-				version: 1,
-				action: b
-			}]
+			endpoints: [
+				new Endpoint('user/create', 2, a),
+				new Endpoint('user/create', 1, a),
+				new Endpoint('user/update', 3, b),
+				new Endpoint('user/update', 2, b),
+				new Endpoint('user/update', 1, b)
+			]
 		})
 	})
 
@@ -110,19 +72,10 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 2,
 			versions: ['v1', 'v2'],
-			endpoints: [{
-				url: '/v2/user/create',
-				name: 'user/create',
-				versionStr: 'v2',
-				version: 2,
-				action: b
-			}, {
-				url: '/v1/user/create',
-				name: 'user/create',
-				versionStr: 'v1',
-				version: 1,
-				action: a
-			}]
+			endpoints: [
+				new Endpoint('user/create', 2, b),
+				new Endpoint('user/create', 1, a)
+			]
 		})
 	})
 
@@ -155,49 +108,15 @@ describe('versions', function () {
 			minVersion: 1,
 			maxVersion: 3,
 			versions: ['v1', 'v2', 'v3'],
-			endpoints: [{
-				url: '/v3/user/create',
-				name: 'user/create',
-				versionStr: 'v3',
-				version: 3,
-				action: a
-			}, {
-				url: '/v2/user/create',
-				name: 'user/create',
-				versionStr: 'v2',
-				version: 2,
-				action: b
-			}, {
-				url: '/v1/user/create',
-				name: 'user/create',
-				versionStr: 'v1',
-				version: 1,
-				action: b
-			}, {
-				url: '/v1/user/old',
-				name: 'user/old',
-				versionStr: 'v1',
-				version: 1,
-				action: c
-			}, {
-				url: '/v3/user/current',
-				name: 'user/current',
-				versionStr: 'v3',
-				version: 3,
-				action: d
-			}, {
-				url: '/v2/user/current',
-				name: 'user/current',
-				versionStr: 'v2',
-				version: 2,
-				action: d
-			}, {
-				url: '/v1/user/current',
-				name: 'user/current',
-				versionStr: 'v1',
-				version: 1,
-				action: d
-			}]
+			endpoints: [
+				new Endpoint('user/create', 3, a),
+				new Endpoint('user/create', 2, b),
+				new Endpoint('user/create', 1, b),
+				new Endpoint('user/old', 1, c),
+				new Endpoint('user/current', 3, d),
+				new Endpoint('user/current', 2, d),
+				new Endpoint('user/current', 1, d)
+			]
 		})
 	})
 })
