@@ -1,3 +1,7 @@
+# 5.6.0
+* Added: `timeout` and `ontimeout` options to allow to monitor endpoints that take too long to finish.
+* Changed: `body` passed to `onsuccess`, `onfailure` and `ontimeout` are now a snapshot on the initial body. In previous versions, is the endpoint handler (on any filter) modified the body, the changes would overwrite the information provided to those callbacks.
+
 # 5.5.0
 * Added: support for setting body limit by endpoint using `module.exports.bodyLimit`
 
