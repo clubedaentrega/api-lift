@@ -96,6 +96,32 @@ describe('api', function () {
 		call('v2/user/create', body)
 	})
 
+	it('should call ontimeout', function (done) {
+		api._timeout = 100
+		api._ontimeout = function (runInfo, body, endpoint) {
+			runInfo.should.be.an.Object()
+			runInfo.req.should.be.an.Object()
+			runInfo.requestId.should.be.a.String().with.length(24)
+			runInfo.beginTime.should.be.a.Number()
+			runInfo.profileData.should.be.an.Array()
+
+			body.should.be.eql({
+				name: 'Gui',
+				password: '[HIDDEN]'
+			})
+
+			endpoint.name.should.be.equal('user/create')
+			endpoint.action.name.should.be.equal('user/create')
+
+			api._ontimeout = null
+			done()
+		}
+		call('v2/user/create', {
+			name: 'Gui',
+			password: 'timeout'
+		})
+	})
+
 	it('should warn about unsupported version', function (done) {
 		call('v0/user/create', body, function (res) {
 			res.failure.code.should.be.equal(199)
