@@ -1,6 +1,6 @@
 {
 	"name": "api-lift",
-	"version": "5.6.1",
+	"version": "6.0.0",
 	"author": "Sitegui <sitegui@sitegui.com.br>",
 	"description": "Create a ready-to-go express router for a REST API with filters, input validation, output checking, versioning, automatic routes and logging",
 	"main": "./index.js",
@@ -18,12 +18,12 @@
 	"dependencies": {
 		"body-parser": "^1.15.2",
 		"express": "^4.14.0",
-		"lift-it": "^4.1.0",
+		"lift-it": "^5.0.0",
 		"validate-fields": "^3.6.1"
 	},
 	"license": "MIT",
 	"engines": {
-		"node": ">=0.12"
+		"node": ">=4"
 	},
 	"scripts": {
 		"test": "mocha test -b",
@@ -31,9 +31,9 @@
 		"commit-docs": "npm run docs && git checkout gh-pages && rm -rf docs && mv docs2 docs && git add docs -A && git commit"
 	},
 	"devDependencies": {
-		"mocha": "^3.0.2",
-		"request": "^2.74.0",
+		"mocha": "^3.1.0",
+		"request": "^2.75.0",
 		"should": "^11.1.0",
-		"jsdoc": "^3.4.0"
+		"jsdoc": "^3.4.2"
 	}
 }

@@ -1,3 +1,10 @@
+# 6.0.0
+* Changed: major update run-it@v3
+* Changed: add support for object with extra properties in `error()` functions
+
+## Breaking changes
+* Removed support for formats in `error()` functions
+
 # 5.6.1
 * Fixed: bug when handling invalid URL, `next()` and `res.json()` were called for the same request
 
