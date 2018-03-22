@@ -1,6 +1,6 @@
 'use strict'
 
-var express = require('express'),
+let express = require('express'),
 	APIError = require('./lib/APIError'),
 	lift = require('./lib/lift'),
 	versions = require('./lib/versions'),
@@ -32,17 +32,17 @@ module.exports = function (options) {
 	options = prepareOptions(options)
 
 	// Lift and call error callbacks
-	var lifted = lift(options)
+	let lifted = lift(options)
 
-	var api = new API(lifted, options)
+	let api = new API(lifted, options)
 
 	// Prepare express middlewares
-	api.router.use(function (req, res, next) {
+	api.router.use((req, res, next) => {
 		// Save the time at the beggining
 		req.runInfo = {
 			beginTime: Date.now(),
 			requestId: genId(),
-			req: req
+			req
 		}
 
 		if (req.method === 'POST' && !req.is('json')) {
@@ -57,13 +57,13 @@ module.exports = function (options) {
 	api._prepareEndpoints(options.minVersion)
 
 	// Prepare express endpoint handler
-	api.router.use(function (req, res, next) {
+	api.router.use((req, res, next) => {
 		if (req.method !== 'POST') {
 			// We're only looking into POST requests
 			return next()
 		}
 
-		api._runRequest(req, res, function (err, out) {
+		api._runRequest(req, res, (err, out) => {
 			if (err || !out) {
 				return next(err)
 			}
@@ -76,27 +76,27 @@ module.exports = function (options) {
 		api.router.get('/' + options.openApi.serveAs, getOpenApiMiddlewares())
 		api.router.get('/v-last/' + options.openApi.serveAs, getOpenApiMiddlewares(api.maxVersion))
 
-		var version
+		let version
 		for (version = api.minVersion; version <= api.maxVersion; version++) {
 			api.router.get('/v' + version + '/' + options.openApi.serveAs, getOpenApiMiddlewares(version))
 		}
 	}
 
 	// Error handler
-	api.router.use(function (err, req, res, next) {
-		next = next // next isn't used on purpose, because express demands a 4-arity function
+	// eslint-disable-next-line no-unused-vars
+	api.router.use((err, req, res, next) => {
 		if (err instanceof Error && err.status === 400 && typeof err.body === 'string') {
 			// JSON parsing error
 			err = APIError.create(101, 'Invalid JSON: ' + err)
 		}
-		api._handleError(err, req.body, req.runInfo, null, function (out) {
+		api._handleError(err, req.body, req.runInfo, null, out => {
 			res.json(out)
 		})
 	})
 
 	function getOpenApiMiddlewares(version) {
 		return [options.openApi.middleware, function (req, res) {
-			var spec = api.getOpenAPISpec(version)
+			let spec = api.getOpenAPISpec(version)
 			if (!spec.basePath) {
 				spec.basePath = req.baseUrl || '/'
 			}
@@ -128,7 +128,7 @@ module.exports.APIError = APIError
  * @private
  */
 function prepareOptions(options) {
-	var vO
+	let vO
 
 	// Set defaults
 	options = options || {}

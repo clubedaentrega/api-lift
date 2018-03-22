@@ -8,7 +8,7 @@ Create a ready-to-go express router for a REST API with filters, input validatio
 See on [npm](https://www.npmjs.com/package/api-lift)
 
 ## Install
-`npm install api-lift --save`
+`npm install api-lift`
 
 ## Important note
 This module is built on top of [express](https://www.npmjs.com/package/express) and [lift-it](https://www.npmjs.com/package/lift-it) and *is* meant to be very opinionated.
@@ -33,9 +33,9 @@ Okay, after complying to all the rules outlined above, you get:
 
 ## Options
 ```js
-var apiLift = require('api-lift')
+let apiLift = require('api-lift')
 
-var api = apiLift({
+let api = apiLift({
 	// All options are optional :P
 	// The default values are described bellow
 	// Some are not configurable and can not be changed,
@@ -144,7 +144,7 @@ var api = apiLift({
 
 // `api.router` is an express router object
 // You can, for example:
-var app = apiLift.express() // see note bellow about apiLift.express
+let app = apiLift.express() // see note bellow about apiLift.express
 app.use('/api', api.router)
 require('http').createServer(app).listen(80)
 ```
@@ -166,9 +166,9 @@ The return of `apiLift()` call is an instance of `API`. Its properties are:
 If you are not interested in the router, but in the returned meta-data (like max version), use `apiLift.info(options)` instead:
 
 ```js
-var apiLift = require('api-lift')
+let apiLift = require('api-lift')
 
-var info = apiLift.info({
+let info = apiLift.info({
 	// The default values are described bellow
 	folder: './api',
 	minVersion: 1

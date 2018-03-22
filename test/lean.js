@@ -1,12 +1,12 @@
-/*globals describe, it*/
+/* globals describe, it*/
 'use strict'
 
-var apiLift = require('../')
+let apiLift = require('../')
 require('should')
 
-describe('info', function () {
-	var info
-	it('should only get info', function () {
+describe('info', () => {
+	let info
+	it('should only get info', () => {
 		info = apiLift.info({
 			folder: 'test/api'
 		})

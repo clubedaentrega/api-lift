@@ -1,7 +1,7 @@
-/*globals describe, it*/
+/* globals describe, it*/
 'use strict'
 
-var apiLift = require('../'),
+let apiLift = require('../'),
 	app = apiLift.express(),
 	http = require('http'),
 	request = require('request'),
@@ -12,8 +12,8 @@ var apiLift = require('../'),
 	},
 	api, server, baseUrl, options
 
-describe('api', function () {
-	it('should lift', function () {
+describe('api', () => {
+	it('should lift', () => {
 		options = {
 			folder: 'test/api',
 			openApi: {
@@ -23,16 +23,16 @@ describe('api', function () {
 		api = apiLift(options)
 	})
 
-	it('should start a server', function (done) {
+	it('should start a server', done => {
 		app.use(api.router)
-		server = http.createServer(app).listen(0, function () {
+		server = http.createServer(app).listen(0, () => {
 			baseUrl = 'http://localhost:' + server.address().port + '/'
 			done()
 		})
 	})
 
-	it('should create the route for /v1/user/create -> create-v1.js', function (done) {
-		call('v1/user/create', body, function (res) {
+	it('should create the route for /v1/user/create -> create-v1.js', done => {
+		call('v1/user/create', body, res => {
 			res.should.be.eql({
 				failure: null
 			})
@@ -40,14 +40,14 @@ describe('api', function () {
 		})
 	})
 
-	it('should create the route for /v2/user/create -> create.js', function (done) {
-		call('v2/user/create', body, function (res) {
+	it('should create the route for /v2/user/create -> create.js', done => {
+		call('v2/user/create', body, res => {
 			res.failure.code.should.be.equal(101)
 			done()
 		})
 	})
 
-	it('should call onsuccess', function (done) {
+	it('should call onsuccess', done => {
 		api._onsuccess = function (response, runInfo, body, endpoint) {
 			response.should.be.eql({
 				failure: null
@@ -72,7 +72,7 @@ describe('api', function () {
 		call('v1/user/create', body)
 	})
 
-	it('should call onfailure', function (done) {
+	it('should call onfailure', done => {
 		api._onfailure = function (response, runInfo, body, endpoint, error) {
 			response.failure.code.should.be.equal(101)
 
@@ -96,7 +96,7 @@ describe('api', function () {
 		call('v2/user/create', body)
 	})
 
-	it('should call ontimeout', function (done) {
+	it('should call ontimeout', done => {
 		api._timeout = 100
 		api._ontimeout = function (runInfo, body, endpoint) {
 			runInfo.should.be.an.Object()
@@ -122,49 +122,50 @@ describe('api', function () {
 		})
 	})
 
-	it('should warn about unsupported version', function (done) {
-		call('v0/user/create', body, function (res) {
+	it('should warn about unsupported version', done => {
+		call('v0/user/create', body, res => {
 			res.failure.code.should.be.equal(199)
 			res.failure.message.should.be.equal('Version v0 is not supported. Supported versions are: v1, v2')
 			done()
 		})
 	})
 
-	it('should warn about unknown version', function (done) {
-		call('v10/user/create', body, function (res) {
+	it('should warn about unknown version', done => {
+		call('v10/user/create', body, res => {
 			res.failure.code.should.be.equal(199)
 			res.failure.message.should.be.equal(
-				'Version v10 is not supported. Supported versions are: v1, v2')
+				'Version v10 is not supported. Supported versions are: v1, v2'
+			)
 			done()
 		})
 	})
 
-	it('should warn about non existent endpoint', function (done) {
-		call('v1/i/do/not/exist', body, function (res) {
+	it('should warn about non existent endpoint', done => {
+		call('v1/i/do/not/exist', body, res => {
 			res.failure.code.should.be.equal(199)
 			res.failure.message.should.be.equal('The action i/do/not/exist does not exists in version v1')
 			done()
 		})
 	})
 
-	it('should warn about invalid URL structure', function (done) {
-		call('not/valid', body, function (res) {
+	it('should warn about invalid URL structure', done => {
+		call('not/valid', body, res => {
 			res.failure.code.should.be.equal(199)
 			res.failure.message.should.be.equal('Invalid path format, expected something like /v2/user/create')
 			done()
 		})
 	})
 
-	it('should warn about request body to large', function (done) {
-		call('v2/user/update', body, function (res) {
+	it('should warn about request body to large', done => {
+		call('v2/user/update', body, res => {
 			res.failure.code.should.be.equal(100)
 			res.failure.message.should.be.equal('request entity too large')
 			done()
 		})
 	})
 
-	it('should expose the run() method to call endpoints', function (done) {
-		api.run('/v2/user/create', body, function (out) {
+	it('should expose the run() method to call endpoints', done => {
+		api.run('/v2/user/create', body, out => {
 			out.should.be.eql({
 				failure: {
 					code: 101,
@@ -175,12 +176,12 @@ describe('api', function () {
 		})
 	})
 
-	it('should create the open api spec', function () {
-		var v1PathItem = {
+	it('should create the open api spec', () => {
+		let v1PathItem = {
 				post: {
 					parameters: [{
 						name: 'json',
-						in : 'body',
+						in: 'body',
 						required: true,
 						schema: {
 							type: 'object',
@@ -210,7 +211,7 @@ describe('api', function () {
 				post: {
 					parameters: [{
 						name: 'json',
-						in : 'body',
+						in: 'body',
 						required: true,
 						schema: {
 							type: 'object',
@@ -268,12 +269,12 @@ describe('api', function () {
 		})
 	})
 
-	it('should serve the open api spec', function (done) {
+	it('should serve the open api spec', done => {
 		request({
 			url: baseUrl + 'v-last/swagger.json'
-		}, function (err, _, res) {
+		}, (err, _, res) => {
 			should(err).be.null()
-			var spec = JSON.parse(res)
+			let spec = JSON.parse(res)
 			spec.info.version.should.be.equal('v2')
 			done()
 		})
@@ -290,10 +291,10 @@ function call(name, body, callback) {
 		url: baseUrl + name,
 		method: 'POST',
 		json: body
-	}, function (err, _, res) {
+	}, (err, _, res) => {
 		should(err).be.null()
 		if (callback) {
-			callback(res)
+			return callback(res)
 		}
 	})
 }

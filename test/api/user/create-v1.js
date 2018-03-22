@@ -1,6 +1,6 @@
 'use strict'
 
-var assert = require('assert')
+let assert = require('assert')
 
 module.exports.description = 'Create a user. Do not check for weak passwords. Deprecated'
 

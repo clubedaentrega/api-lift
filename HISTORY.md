@@ -1,3 +1,8 @@
+# 7.0.0
+## Breaking changes
+* Dropped support for Node.JS < 6
+* Update dependencies
+
 # 6.0.0
 * Changed: major update run-it@v3
 * Changed: add support for object with extra properties in `error()` functions

@@ -1,12 +1,12 @@
-/*globals describe, it*/
+/* globals describe, it*/
 'use strict'
 
-var versions = require('../lib/versions'),
+let versions = require('../lib/versions'),
 	Endpoint = require('../lib/Endpoint')
 require('should')
 
-describe('versions', function () {
-	it('should return an empty set if no action is given', function () {
+describe('versions', () => {
+	it('should return an empty set if no action is given', () => {
 		check(0, [], {
 			minVersion: 0,
 			maxVersion: 0,
@@ -15,8 +15,8 @@ describe('versions', function () {
 		})
 	})
 
-	it('should set all endpoints at the min version if no file has a tag', function () {
-		var a = {
+	it('should set all endpoints at the min version if no file has a tag', () => {
+		let a = {
 			name: 'user/create'
 		}
 
@@ -28,8 +28,8 @@ describe('versions', function () {
 		})
 	})
 
-	it('should not set after the last tagged version if there is no untagged file', function () {
-		var a = {
+	it('should not set after the last tagged version if there is no untagged file', () => {
+		let a = {
 				name: 'user/create-v2'
 			},
 			b = {
@@ -60,8 +60,8 @@ describe('versions', function () {
 		})
 	})
 
-	it('should work for a snapshotted file', function () {
-		var a = {
+	it('should work for a snapshotted file', () => {
+		let a = {
 				name: 'user/create-v1'
 			},
 			b = {
@@ -79,19 +79,20 @@ describe('versions', function () {
 		})
 	})
 
-	it('should raise an error if a tagged file is older than min version', function () {
-		var a = {
-				name: 'user/create-v2'
-			},
-			boom = function () {
-				versions(3, [a])
-			}
+	it('should raise an error if a tagged file is older than min version', () => {
+		let a = {
+			name: 'user/create-v2'
+		}
+
+		function boom() {
+			versions(3, [a])
+		}
 
 		boom.should.throw('Uhm... You have told me the minimum version you want to support is 3 but the file user/create-v2 violates this. You must either decrease the min version value or remove the offending file')
 	})
 
-	it('should work for all together', function () {
-		var a = {
+	it('should work for all together', () => {
+		let a = {
 				name: 'user/create'
 			},
 			b = {
@@ -123,7 +124,7 @@ describe('versions', function () {
 
 function check(minVersion, actions, answer) {
 	answer.endpointByUrl = Object.create(null)
-	answer.endpoints.forEach(function (endpoint) {
+	answer.endpoints.forEach(endpoint => {
 		answer.endpointByUrl[endpoint.url] = endpoint
 	})
 	versions(minVersion, actions).should.be.eql(answer)
