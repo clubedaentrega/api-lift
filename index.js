@@ -45,8 +45,8 @@ module.exports = function (options) {
 			req
 		}
 
-		if (req.method === 'POST' && !req.is('json')) {
-			return next(APIError.create(400, 101,
+		if ((req.method === 'POST' || req.method === 'PUT') && !req.is('json')) {
+			return next(APIError.create(406, 101,
 				'Invalid Content-Type header, application/json was expected'))
 		}
 
