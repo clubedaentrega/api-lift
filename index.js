@@ -46,7 +46,7 @@ module.exports = function (options) {
 		}
 
 		if (req.method === 'POST' && !req.is('json')) {
-			return next(APIError.create(101,
+			return next(APIError.create(400, 101,
 				'Invalid Content-Type header, application/json was expected'))
 		}
 
@@ -82,9 +82,9 @@ module.exports = function (options) {
 	api.router.use((err, req, res, next) => {
 		if (err instanceof Error && err.status === 400 && typeof err.body === 'string') {
 			// JSON parsing error
-			err = APIError.create(101, 'Invalid JSON: ' + err)
+			err = APIError.create(400, 101, 'Invalid JSON: ' + err)
 		}
-		api._handleError(err, req.body, req.runInfo, null, out => {
+		api._handleError(err, req.body, req.runInfo, null, res, out => {
 			res.json(out)
 		})
 	})

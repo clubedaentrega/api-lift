@@ -238,5 +238,13 @@ TODO
 ### Body Limit
 Each endpoint can set its own body size limit by setting the `module.exports.bodyLimit` property (syntax from [bytes](https://www.npmjs.com/package/bytes)). If it doesn't set this property, the limit will be the one defined in the `bodyParser` field from `options`.
 
+## Success
+The default HTTP status code to a correct execution of `success` is `200 Ok`.
+If the success function has in its `output` the property `HTTPStatusCode`, this one is answered. 
+Note: `HTTPStatusCode` is a private property and will be deleted after sent. Do not use it as a property in your `output`.
+
 ## Error codes
-TODO
+The generated erros respects the [APIError class](https://github.com/clubedaentrega/api-lift/blob/master/lib/APIError.js), this is, always have an internal code and a message. A HTTP status code is optional, and if not set the `500 Internal Server Error` is answered.
+
+The APIError will always respect the information received from `error` function.
+The invalid `path` errors are always `404 Not Found` and invalid content-type/json `400 Bad Request`
