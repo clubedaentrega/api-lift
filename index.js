@@ -56,21 +56,6 @@ module.exports = function (options) {
 	// Create the endpoints using versioning
 	api._prepareEndpoints(options.minVersion)
 
-	// Prepare express endpoint handler
-	api.router.use((req, res, next) => {
-		if (req.method !== 'POST') {
-			// We're only looking into POST requests
-			return next()
-		}
-
-		api._runRequest(req, res, (err, out) => {
-			if (err || !out) {
-				return next(err)
-			}
-			res.json(out)
-		})
-	})
-
 	// Prepare open API routes
 	if (options.openApi.serve) {
 		api.router.get('/' + options.openApi.serveAs, getOpenApiMiddlewares())
@@ -81,6 +66,16 @@ module.exports = function (options) {
 			api.router.get('/v' + version + '/' + options.openApi.serveAs, getOpenApiMiddlewares(version))
 		}
 	}
+
+	// Prepare express endpoint handler
+	api.router.use((req, res, next) => {
+		api._runRequest(req, res, (err, out) => {
+			if (err || !out) {
+				return next(err)
+			}
+			res.json(out)
+		})
+	})
 
 	// Error handler
 	// eslint-disable-next-line no-unused-vars
@@ -160,6 +155,9 @@ function prepareOptions(options) {
 	options.filters = options.filters || './filters'
 	options.bodyParser = options.bodyParser || {}
 	options.minVersion = options.minVersion === undefined ? 1 : options.minVersion
+
+	options.headers = options.headers || []
+	options.checkId = options.checkId || (() => false)
 
 	options.openApi = options.openApi || {}
 	options.openApi.serve = Boolean(options.openApi.serve)
