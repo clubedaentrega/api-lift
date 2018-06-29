@@ -23,11 +23,12 @@ This module is locked down by some strong assumptions:
 * The endpoints are to be implemented as supported by [lift-it](https://www.npmjs.com/package/lift-it). See details in section "Endpoint handler"
 * Works with REST pattern, generating the following routes for each http method:
 	* DELETE /resource/id -> call resource/rest_delete.js
-	* GET /resource -> call resource/rest_read.js
+	* GET /resource -> call resource/rest_list.js
+	* GET /resource/id -> call resource/rest_read.js
 	* PUT /resource/id -> call resource/rest_update.js
 	* POST /resource -> call resource/rest_create.js
 	* POST /resource/id/action -> call resource/action.js
-* Params GET (in GET method), resource id (from url) and headers vars (described in headers options) will be added to json body in the endpoints calls
+* Query params (in GET method), resource id (from url) and headers vars (described in headers options) will be added to json body in the endpoints calls
 * Standard output for success: `{failure:null}`, for error: `{failure:{code:Number,message:String}}`
 
 ## Features
