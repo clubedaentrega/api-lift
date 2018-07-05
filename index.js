@@ -156,7 +156,8 @@ function prepareOptions(options) {
 	options.bodyParser = options.bodyParser || {}
 	options.minVersion = options.minVersion === undefined ? 1 : options.minVersion
 
-	options.headers = options.headers || []
+	options.isRest = Boolean(options.isRest)
+	options.hasApiKeyAuth = Boolean(options.hasApiKeyAuth)
 	options.checkId = options.checkId || (() => false)
 
 	options.openApi = options.openApi || {}
