@@ -158,6 +158,7 @@ function prepareOptions(options) {
 
 	options.isRest = Boolean(options.isRest)
 	options.hasApiKeyAuth = Boolean(options.hasApiKeyAuth)
+	options.errors = options.errors || {}
 	options.checkId = options.checkId || (() => false)
 
 	options.openApi = options.openApi || {}
