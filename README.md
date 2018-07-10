@@ -132,6 +132,8 @@ let api = apiLift({
 		serve: false,
 		// File name used to serve
 		serveAs: 'swagger.json',
+		// Base swagger to start completing
+		// Usually, we have info, basePath, host and schemes properties from root object
 		middleware: function (req, res, next) {
 			// An express middleware, set on the spec-serving rout
 			// May be used to implement authentication, for example
