@@ -28,7 +28,7 @@ This module is locked down by some strong assumptions:
 	* PUT /resource/id -> call resource/rest_update.js
 	* POST /resource -> call resource/rest_create.js
 	* POST /resource/id/action -> call resource/action.js
-* Query params (in GET method), resource id (from url) and header apiKey (if hasApiKey) will be added to json body in the endpoints calls
+* Query params (in GET method), resource id (from url) and header (apiKey if hasApiKey, Authorization if hasOAuth) will be added to json body in the endpoints calls
 * Standard output for success: `{failure:null}`, for error: `{failure:{code:Number,message:String}}`
 
 ## Features
@@ -88,7 +88,8 @@ let api = apiLift({
 	minVersion: 1, // the min version to support
 	dataScrub: [/session|password|serial|token/i], // describe fields to hide in the body
 	isRest: true,
-	hasApiKeyAuth: true // HTTP header apiKey will be passed in json to the endpoints
+	hasApiKeyAuth: false // HTTP header apiKey will be passed in json to the endpoints,
+	hasOAuth: true // HTTP header Authorization will be passed in json to the endpoints
 	checkId: function(x){
 		// Checks whether the string x is an id of the resource
 	},
