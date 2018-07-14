@@ -239,7 +239,6 @@ describe('api', () => {
 		api.getOpenAPISpec().should.be.eql({
 			swagger: '2.0',
 			info: {
-				title: 'API',
 				version: 'v2.1'
 			},
 			consumes: ['application/json'],
@@ -256,7 +255,6 @@ describe('api', () => {
 		api.getOpenAPISpec(2).should.be.eql({
 			swagger: '2.0',
 			info: {
-				title: 'API',
 				version: 'v2'
 			},
 			consumes: ['application/json'],
