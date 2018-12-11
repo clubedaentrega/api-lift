@@ -1,6 +1,6 @@
 {
 	"name": "api-lift",
-	"version": "8.0.5",
+	"version": "8.0.6",
 	"author": "Sitegui <sitegui@sitegui.com.br>",
 	"description": "Create a ready-to-go express router for a REST API with filters, input validation, output checking, versioning, automatic routes and logging",
 	"main": "./index.js",
@@ -19,7 +19,7 @@
 		"body-parser": "^1.18.2",
 		"express": "^4.16.3",
 		"lift-it": "^7.0.0",
-		"validate-fields": "^4.0.0"
+		"validate-fields": "^5.1.1"
 	},
 	"license": "MIT",
 	"engines": {
@@ -31,9 +31,9 @@
 		"commit-docs": "npm run docs && git checkout gh-pages && rm -rf docs && mv docs2 docs && git add docs -A && git commit"
 	},
 	"devDependencies": {
+		"jsdoc": "^3.5.5",
 		"mocha": "^5.0.4",
-		"request": "^2.85.0",
-		"should": "^13.2.1",
-		"jsdoc": "^3.5.5"
+		"request": "^2.88.0",
+		"should": "^13.2.1"
 	}
 }
