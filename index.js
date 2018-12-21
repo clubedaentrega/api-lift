@@ -73,6 +73,9 @@ module.exports = function (options) {
 			if (err || !out) {
 				return next(err)
 			}
+			if (res.statusCode === 302) {
+				return res.redirect(out.redirect)
+			}
 			res.json(out)
 		})
 	})
